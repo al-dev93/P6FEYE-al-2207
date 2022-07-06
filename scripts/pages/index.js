@@ -1,28 +1,20 @@
     async function getPhotographers() {
-        // Penser à remplacer par les données récupérées dans le json
-        const photographers = [
-            {
-                "name": "Ma data test",
-                "id": 1,
-                "city": "Paris",
-                "country": "France",
-                "tagline": "Ceci est ma data test",
-                "price": 400,
-                "portrait": "account.png"
-            },
-            {
-                "name": "Autre data test",
-                "id": 2,
-                "city": "Londres",
-                "country": "UK",
-                "tagline": "Ceci est ma data test 2",
-                "price": 500,
-                "portrait": "account.png"
-            },
-        ]
-        // et bien retourner le tableau photographers seulement une fois
-        return ({
-            photographers: [...photographers]})
+        // répertoire du fichier json
+        const url = '/data/photographers.json'
+        
+        return fetch(url)
+            .then(response => {
+                if(response.ok) {
+                    return response.json();
+                }
+            })
+            .then(response => {
+                return ([
+                    { photographers: [...response.photographers]},
+                    { media: [...response.media]}
+                ]);
+            })
+            .catch(err => console.log("une erreur s'est produite", err));
     }
 
     async function displayData(photographers) {
@@ -37,8 +29,8 @@
 
     async function init() {
         // Récupère les datas des photographes
-        const { photographers } = await getPhotographers();
-        console.log(photographers)
+        const [{ photographers }, { media }] = await getPhotographers();
+        //console.log(photographers)
 
         displayData(photographers);
     }

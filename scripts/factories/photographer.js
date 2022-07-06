@@ -1,6 +1,7 @@
 function photographerFactory(data) {
-    const { name, portrait } = data;
+    const { name, portrait, city, country, tagline, price } = data;
     const picture = `assets/photographers/${portrait}`;
+    const pricePerDay = `${price}€/jour` 
 
     function getUserCardDOM() {
         const article = document.createElement( 'article' );
