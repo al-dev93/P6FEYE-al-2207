@@ -2,14 +2,10 @@
 
 /* déclarations de variables */
 :root {
-    --fontSizePhotographer_small: 36px;
-    --fontSizeAddress_small: 13px;
-    --fontSizeSlogan_small: 10px;
-    --fontSizePrice_small: 9px;
-    --lineHeightPhotographer_small: 47px;
-    --lineHeightAddress_small: 17px;
-    --lineHeightSlogan_small: 13px;
-    --lineHeightPrice_small: 12px;
+    --fontSizePhotographer_small: 2.25em;
+    --fontSizeAddress_small: 1.444em;
+    --fontSizeSlogan_small: 1.111em;
+    --fontSizePrice_small: 0.563em;
     --colorWight: #FFFFFF;
     --colorBlack: #000000;
     --colorRed: #901C1C;
@@ -61,7 +57,7 @@ h1 {
     color: var(--colorLightRed);
     font-size: var(--fontSizePhotographer_small);
     font-weight: 400;
-    line-height: var(--lineHeightPhotographer_small);
+    line-height: 1.306em;
     margin-bottom: 0;
 }
 
@@ -77,7 +73,7 @@ h1 {
     align-items: center;
     margin-top: 0;
     font-size: var(--fontSizePrice_small);
-    line-height: var(--lineHeightPrice_small);
+    line-height: 1.333em;
     color: var(--colorGreyLight);
 }
 
@@ -85,7 +81,7 @@ h1 {
     margin-bottom: 3px;
     font-size: var(--fontSizeAddress_small);
     font-style: normal;
-    line-height: var(--lineHeightAddress_small);
+    line-height: 1.308em;
     color: var(--colorRed);
 }
 
@@ -93,6 +89,6 @@ h1 {
     margin-bottom: 3px;
     font-size: var(--fontSizeSlogan_small);
     font-weight: 400;
-    line-height: var(--lineHeightSlogan_small);
+    line-height: 1.3em;
     color: var(--colorBlack);
 }
