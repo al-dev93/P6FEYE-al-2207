@@ -1,5 +1,19 @@
 @import url("photographer.css");
 
+/* déclarations de variables */
+:root {
+    --fontSizePhotographer_small: 2.25em;
+    --fontSizeAddress_small: 1.444em;
+    --fontSizeSlogan_small: 1.111em;
+    --fontSizePrice_small: 0.563em;
+    --colorWight: #FFFFFF;
+    --colorBlack: #000000;
+    --colorRed: #901C1C;
+    --colorLightRed: #D3573C;
+    --colorGrey: #525252;
+    --colorGreyLight: #757575;
+}
+
 body {
     font-family: "DM Sans", sans-serif;
     margin: 0;
@@ -15,7 +29,7 @@ header {
 }
 
 h1 {
-    color: #901C1C;
+    color: var(--colorRed);
     margin-right: 100px;
 }
 
@@ -40,11 +54,41 @@ h1 {
 }
 
 .photographer_section article h2 {
-    color: #D3573C;
-    font-size: 36px;
+    color: var(--colorLightRed);
+    font-size: var(--fontSizePhotographer_small);
+    font-weight: 400;
+    line-height: 1.306em;
+    margin-bottom: 0;
 }
 
 .photographer_section article img {
     height: 200px;
     width: 200px;
+    border-radius: 50%;
+}
+
+.photographer_section article p{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0;
+    font-size: var(--fontSizePrice_small);
+    line-height: 1.333em;
+    color: var(--colorGreyLight);
+}
+
+.photographer_section p address {
+    margin-bottom: 3px;
+    font-size: var(--fontSizeAddress_small);
+    font-style: normal;
+    line-height: 1.308em;
+    color: var(--colorRed);
+}
+
+.photographer_section p strong {
+    margin-bottom: 3px;
+    font-size: var(--fontSizeSlogan_small);
+    font-weight: 400;
+    line-height: 1.3em;
+    color: var(--colorBlack);
 }
