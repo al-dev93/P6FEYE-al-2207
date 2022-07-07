@@ -92,3 +92,7 @@ h1 {
     line-height: 1.3em;
     color: var(--colorBlack);
 }
+
+.linkPhotographer {
+    text-decoration: none;
+}
