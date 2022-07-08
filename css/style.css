@@ -3,8 +3,8 @@
 /* déclarations de variables */
 :root {
     --fontSizePhotographer_small: 2.25em;
-    --fontSizeAddress_small: 1.444em;
-    --fontSizeSlogan_small: 1.111em;
+    --fontSizeAddress_small: 0.813em;
+    --fontSizeSlogan_small: 0.625em;
     --fontSizePrice_small: 0.563em;
     --colorWight: #FFFFFF;
     --colorBlack: #000000;
@@ -19,6 +19,9 @@ body {
     margin: 0;
 }
 
+a {
+    text-decoration: none;
+}
 
 header {
     display: flex;
@@ -53,6 +56,10 @@ h1 {
     flex-direction: column;
 }
 
+.photographer_section article:hover {
+    cursor: pointer;
+}
+
 .photographer_section article h2 {
     color: var(--colorLightRed);
     font-size: var(--fontSizePhotographer_small);
@@ -67,25 +74,15 @@ h1 {
     border-radius: 50%;
 }
 
-.photographer_section article p{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 0;
-    font-size: var(--fontSizePrice_small);
-    line-height: 1.333em;
-    color: var(--colorGreyLight);
-}
-
-.photographer_section p address {
-    margin-bottom: 3px;
+.photographer_section article address {
+    margin: 0 0 3px 0;
     font-size: var(--fontSizeAddress_small);
     font-style: normal;
     line-height: 1.308em;
     color: var(--colorRed);
 }
 
-.photographer_section p strong {
+.sloganPhotographer {
     margin-bottom: 3px;
     font-size: var(--fontSizeSlogan_small);
     font-weight: 400;
@@ -93,6 +90,9 @@ h1 {
     color: var(--colorBlack);
 }
 
-.linkPhotographer {
-    text-decoration: none;
+.pricePerDay {
+    margin-bottom: 3px;
+    font-size: var(--fontSizePrice_small);
+    line-height: 1.333em;
+    color: var(--colorGreyLight);
 }
