@@ -5,27 +5,35 @@ function photographerFactory(data) {
     const pricePerDay = `${price}€/jour`;
 
     function getUserCardDOM() {
+        //création de l'architecture de la card photographe
         const article = document.createElement( 'article' );
-        //création de l'image et du titre de la carte
+        article.setAttribute("role", "article");
+        article.setAttribute("aria-label", "Cliquez pour voir les réalisations de");
+        article.setAttribute("tabindex", "0");
+        //création de l'en-tête de la card photographe:image et titre
         const img = document.createElement( 'img' );
         img.setAttribute("src", picture);
-        img.setAttribute("alt", name);
+        img.setAttribute("role", img);
+        img.setAttribute("alt", "");
         const h2 = document.createElement( 'h2' );
         h2.textContent = name;
-        //création des autres éléments dns une balise p
-        const paragraph = document.createElement( 'p');
+        //création du contenu textuel de la card        
         const address = document.createElement( 'address');
         address.textContent = shortAddress;
-        const slogan = document.createElement( 'strong');
+        const slogan = document.createElement( 'span');
         slogan.textContent = tagline;
-        const newLine = document.createElement( 'BR');
-        //création des noeuds dans la balise p
-        paragraph.append(address, slogan, newLine, pricePerDay);
-        //création des noeuds dans la balise article
+        slogan.setAttribute("class", "sloganPhotographer");
+        const cost = document.createElement( 'span' );
+        cost.setAttribute("class", "pricePerDay");
+        cost.textContent = pricePerDay;
+        
+        //insertion des noeuds constituant la card photographe dans la balise article
         article.appendChild(img);
         article.appendChild(h2);
-        article.appendChild(paragraph);
-        
+        article.appendChild(address);
+        article.appendChild(slogan);
+        article.appendChild(cost);
+        //retourne la carte photographe
         return (article);
     }
     return { name, picture, getUserCardDOM }
