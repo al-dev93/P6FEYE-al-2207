@@ -1,24 +1,32 @@
 //Mettre le code JavaScript lié à la page photographer.html
 
-/*
-const parameter = (new URL(document.location)).searchParams;
-const idPhotographer = params.get('id');
+function displayHeaderData(photographers, id) {
+    const photographer = photographers.find(value => value.id == id);
+    const photographHeader = document.querySelector('.photograph-header');
+    const article = photographHeader.getElementsByTagName('article').item(0);
+    const photographerModel = photographerFactory(photographer, 'photographer');
+    const h1 = article.getElementsByTagName('h1').item(0);
+    h1.textContent = photographerModel.name;
+    const paragraph = photographerModel.getUserCardDOM();
+    article.insertAdjacentElement('beforeend', paragraph);
+    const img = photographHeader.getElementsByTagName('img').item(0);
+    img.setAttribute('src', photographerModel.picture);
+}
 
-const query = (photographers.find(ele => ele.id == 930))
-*/
-
-function getPhotographer(photographers) {
-    const idPhotogrpher = new URL(document.location)
-        .searchParams
-        .get('id');
-    return (photographers.find(value => value.id == idPhotogrpher));
+function displayMediaPhotographer(media, id) {
+    const mediaPhotographer = media.filter(value => value.photographerId == id);
 }
 
 async function init() {
+    // récupère l'id du photographe passé en pramètre dans l'url
+    const idPhotographer = new URL(document.location)
+        .searchParams
+        .get('id');
     // Récupère les datas des photographes
     const [{ photographers }, { media }] = await getPhotographers();
-    const photographer = getPhotographer(photographers);
-    console.log(photographer);
+    //
+    displayHeaderData(photographers, idPhotographer);
+    displayMediaPhotographer(media, idPhotographer);
 }
 
 init();

@@ -3,18 +3,8 @@
         const photographersSection = document.querySelector(".photographer_section");
 
         photographers.forEach((photographer) => {
-            const photographerModel = photographerFactory(photographer);
+            const photographerModel = photographerFactory(photographer, 'index');
             const userCardDOM = photographerModel.getUserCardDOM();
-            const linkPhotographer = `/photographer.html?id=${photographer.id}`;
-            //lien vers la page du photographe
-            userCardDOM.addEventListener("click", () =>{
-                window.location.href = linkPhotographer;
-            });
-            userCardDOM.addEventListener("keydown", (e) =>{
-                if(e.key === "Enter") {
-                    window.location.href = linkPhotographer;
-                }
-            })
             photographersSection.appendChild(userCardDOM);
         });
     }
