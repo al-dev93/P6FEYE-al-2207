@@ -1,12 +1,16 @@
 //Mettre le code JavaScript lié à la page photographer.html
 
 function displayHeaderData(photographers, id) {
+    // récupère le titre de la page pour le passer en paramètre à photographerFactory
     const pageName = document.querySelector('title').textContent;
-    console.log(pageName);
+    // extrait l'enregistrement correspondant à l'id du photographe
     const photographer = photographers.find(value => value.id == id);
-    const photographHeader = document.querySelector('.photograph-header');
+    // cible l'élément de la page pour insérer le retour de la photographerFactory
+    const photographHeader = document.querySelector('.photograph_header');
     const article = photographHeader.getElementsByTagName('article').item(0);
+    //appelle photographerFactory en transmettant les données du photographe et le nom de la page
     const photographerModel = photographerFactory(photographer, pageName);
+    //insère le retour de photographerFactory
     const h1 = article.getElementsByTagName('h1').item(0);
     h1.textContent = photographerModel.name;
     const paragraph = photographerModel.getHeaderPhotographDOM();
