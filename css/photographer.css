@@ -2,7 +2,7 @@
 #contact_modal {
     display: none;
 }
-
+/* En-tête informations sur le photographe */
 .photograph_header {
     display: flex;
     justify-content: space-between;
@@ -60,8 +60,10 @@
     border-radius: 5px;
     cursor: pointer;
 }
+/* menu de tri des médias */
 .sort_menu {
-    margin: 9px 0 0 97px;
+    margin: 9px 0 23px 97px;
+    height: 69px;
     display: flex;
     align-items:flex-start;
 }
@@ -71,12 +73,12 @@
     font-size: 18px;
     font-weight: 700;
     line-height: 23px;
+    cursor: pointer;
 }
 .wrapper_select {
     width: 170px;
     position: relative;
 }
-
 .wrapper_select .dropdown {
     display: block;
     position: absolute;
@@ -87,11 +89,9 @@
     border-radius: 0px;
     cursor: pointer;
 }
-
 .wrapper_select.dropdown_open .dropdown {
     transform: rotate(180deg);
 }
-
 .wrapper_select select {
     -webkit-appearance: none;
     appearance: none;
@@ -108,12 +108,10 @@
     font-size: 18px;
     font-weight: 700;
 }
-
 .wrapper_select.dropdown_open select {
     height: 170px;
     padding-top: 9px;
 }
-
 .wrapper_select select option {
     box-sizing: border-box;
     padding: 23px 10px 22px;
@@ -130,7 +128,48 @@
 .wrapper_select.dropdown_open select option:nth-child(3) {
     border-bottom: transparent;
 }
+/*conteneur recevant les médias */
+.media_section{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 95px;
+    row-gap: 30px;
+    margin: 23px 100px 0;
+}
 
+.wrapper_card > img{
+    width: 350px;
+    height: 300px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #c4c4c4;
+}
+
+.wrapper_card .wrapper_cardinfo{
+    display: flex;
+    justify-content: space-between;
+    height: 31px;
+    width: 350px;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 31px;
+    color: var(--colorRed);
+}
+
+.wrapper_cardinfo p{
+    margin: 0 10.38px 0 0;
+    
+}
+
+.wrapper_cardinfo span{
+    display: flex;
+    font-weight: 500;
+}
+
+.wrapper_cardinfo span img{
+    margin-left: 4.62px;
+    align-self: center;
+}
 .modal {
     border-radius: 5px;
     background-color: #DB8876;

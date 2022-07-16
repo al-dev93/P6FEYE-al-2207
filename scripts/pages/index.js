@@ -13,7 +13,7 @@
 
     async function init() {
         // Récupère les datas des photographes
-        const [{ photographers }, { media }] = await getPhotographers();
+        const [{ photographers }] = await getPhotographers();
         // affiche les cartes des photographes dans la page
         displayData(photographers);
     }

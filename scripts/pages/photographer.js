@@ -1,6 +1,6 @@
 //Mettre le code JavaScript lié à la page photographer.html
 
-function displayHeaderData(photographers, id) {
+async function displayHeaderData(photographers, id) {
     // récupère le titre de la page pour le passer en paramètre à photographerFactory
     const pageName = document.querySelector('title').textContent;
     // extrait l'enregistrement correspondant à l'id du photographe
@@ -19,8 +19,17 @@ function displayHeaderData(photographers, id) {
     img.setAttribute('src', photographerModel.picture);
 }
 
-function displayMediaPhotographer(media, id) {
-    const mediaPhotographer = media.filter(value => value.photographerId == id);
+async function displayMediaPhotographer(medias, id) {
+    const mediaSection = document.querySelector('.media_section');
+    const mediaPhotographer = medias.filter(value => value.photographerId == id);
+    console.log(mediaPhotographer);
+    mediaPhotographer.forEach((media) => {
+        const mediaModel = mediaFactory(media);
+        if (mediaModel != null){
+            const mediaCardDOM = mediaModel.getImageCardDOM();
+            mediaSection.appendChild(mediaCardDOM);
+        }
+    });
 }
 
 async function init() {
