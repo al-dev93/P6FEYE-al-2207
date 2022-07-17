@@ -2,6 +2,7 @@
 #contact_modal {
     display: none;
 }
+
 /* En-tête informations sur le photographe */
 .photograph_header {
     display: flex;
@@ -60,6 +61,7 @@
     border-radius: 5px;
     cursor: pointer;
 }
+
 /* menu de tri des médias */
 .sort_menu {
     margin: 9px 0 23px 97px;
@@ -128,6 +130,7 @@
 .wrapper_select.dropdown_open select option:nth-child(3) {
     border-bottom: transparent;
 }
+
 /*conteneur recevant les médias */
 .media_section{
     display: grid;
@@ -136,15 +139,14 @@
     row-gap: 30px;
     margin: 23px 100px 0;
 }
-
-.wrapper_card > img{
+/* mise en forme des cartes des médias */
+.wrapper_card > img, .wrapper_card video{
     width: 350px;
     height: 300px;
     margin-bottom: 10px;
     border-radius: 5px;
     background-color: #c4c4c4;
 }
-
 .wrapper_card .wrapper_cardinfo{
     display: flex;
     justify-content: space-between;
@@ -155,21 +157,49 @@
     line-height: 31px;
     color: var(--colorRed);
 }
-
 .wrapper_cardinfo p{
     margin: 0 10.38px 0 0;
     
 }
-
 .wrapper_cardinfo span{
     display: flex;
     font-weight: 500;
 }
-
 .wrapper_cardinfo span img{
     margin-left: 4.62px;
     align-self: center;
 }
+
+/* nombre de likes et coût par jour */
+aside {
+    box-sizing: border-box;
+    position: fixed;
+    width: 376px;
+    height: 89px;
+    right: 36px;
+    bottom: -21px;
+    padding: 21px 34px 0 31px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #DB8876;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 31px;
+}
+aside .number_likes {
+    height: 31px;
+    display: flex;
+}
+aside .number_likes img {
+    margin-left: 4.62px;
+    align-self: center;
+}
+.cost_day {
+    height: 31px;
+}
+
+
 .modal {
     border-radius: 5px;
     background-color: #DB8876;

@@ -1,48 +1,51 @@
 function mediaFactory(data) {
     const {id, title, likes, price} = data;
-
-    function getCardMedia(){
-        //conteneur de la carte
+    
+    //fonction retournant la carte des médias
+    function getCardMediaDOM() {
+        //conteneur de la carte et conteneur des informations textuelles
         const wrapperCard = document.createElement('div');
-        wrapperCard.setAttribute('class', 'wrapper_card');
-        //conteneur du titre et des likes
         const wrapperTextCard = document.createElement('div');
         wrapperTextCard.setAttribute('class', 'wrapper_cardinfo');
-        //informations textuelles
+        wrapperCard.setAttribute('class', 'wrapper_card');
+        //création des éléments d'information
         const titleCard = document.createElement('p');
-        titleCard.textContent = title;
         const numberOfLikes = document.createElement('span');
-        //icone des likes
         const heartIcon = document.createElement('img');
-        heartIcon.setAttribute('src', `assets/icons/favorite-24px 1.svg`);
+        titleCard.textContent = title;
+        heartIcon.setAttribute('src', `assets/icons/favorite-24px-red.svg`);
+        //Insertion des éléments d'information dans le conteneur
         numberOfLikes.appendChild(heartIcon);
         numberOfLikes.insertAdjacentText('afterbegin',`${likes} `);
-        //ajoute le titre et les likes au conteneur
         wrapperTextCard.appendChild(titleCard);
         wrapperTextCard.appendChild(numberOfLikes);
-        //ajoute le conteneur du titre et des likes dans le conteneur de la carte
+        //insertion des éléments dans le conteneur de la carte
         wrapperCard.appendChild(wrapperTextCard);
 
-        return(wrapperCard);
+        /* retourne une image  ou une image de video en fonction **
+        ** de la clé video ou image de l'objet data              */
+        if(data.hasOwnProperty('image')) {
+            return(getCardImage(wrapperCard));
+        } else if(data.hasOwnProperty('video')) {
+            return(getCardVideo(wrapperCard));
+        }
     }
-
-    function getImageCardDOM(){
-        const cardMedia = getCardMedia();
+    //fontion insérant une image dans la carte
+    function getCardImage(cardMedia) {
         const imgCard = document.createElement('img');
         imgCard.setAttribute('src', `assets/media/image/${data.image}`);
         cardMedia.insertAdjacentElement('afterbegin', imgCard);
 
         return(cardMedia);
     }
+    //fonction insérant une miniature de la vidéo dans la carte
+    function getCardVideo(cardMedia) {
+        const videoCard = document.createElement('video');
+        videoCard.setAttribute('src', `assets/media/video/${data.video}`);
+        cardMedia.insertAdjacentElement('afterbegin', videoCard);
 
-    // function getVideoCardDOM(){
-    //     const cardMedia = getCardMedia();
-    //     const videoCard = `/assets/media/video/${data.video}`;
-
-    //     return cardMedia;
-    // }
-
-    if(data.hasOwnProperty('image')) {
-        return { getImageCardDOM };
-    } else return null;
+        return cardMedia;
+    }
+    //retour de la média factory
+    return { getCardMediaDOM };
 }

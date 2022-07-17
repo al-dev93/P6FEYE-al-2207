@@ -6,11 +6,18 @@ function photographerFactory(data, page) {
     const link = `/photographer.html?id=${id}`;
     const currentPage = page;
 
-    /* création de la carte photographe dans une balise article
-    ** englobée dans une balise a pour réaliser le lien vers la
-    ** page photographe   */
     function getUserCardDOM() {
-        const paragraph = getHeaderPhotographDOM();
+        if(currentPage === 'Fisheye - photographe') {
+            // pour insertion dans la page photographe
+            return (getSloganAddress());
+        }else if(currentPage === 'Fisheye') {
+            // pour insertion dans la page d'accueil
+            return (getCard(getSloganAddress()));
+        }
+    }
+    /* création de la carte photographe et de son lien attaché **
+    ** pour la page d'accueil                                  */
+    function getCard(paragraph) {
         // insertion du coût journalier dans le paragraphe transmis
         const cost = document.createElement( 'span' );
         cost.textContent = pricePerDay;
@@ -33,35 +40,27 @@ function photographerFactory(data, page) {
         article.appendChild(h2);
         article.appendChild(paragraph);
         // insertion de la carte dans une balise a pour réaliser le lien
-        const linkPhotographer = document.createElement( 'a' );
-        linkPhotographer.setAttribute( 'href', link );
-        linkPhotographer.setAttribute( 'role', 'link' );
-        linkPhotographer.setAttribute( 'aria-hidden', 'true' );
-        linkPhotographer.appendChild(article);
+        const card = document.createElement( 'a' );
+        card.setAttribute( 'href', link );
+        card.setAttribute( 'role', 'link' );
+        card.setAttribute( 'aria-hidden', 'true' );
+        card.appendChild(article);
 
-        return (linkPhotographer);
+        return (card);
     }
-    /* insertion de l'adresse et du slogan dans une balise p 
-    ** pour intégration dans la page photographe            */
-    function getHeaderPhotographDOM() {
+    /* création de l'adresse et du slogan pour intégration ** 
+    ** dans la carte ou dans la page photographe           */
+    function getSloganAddress() {
         const paragraph = document.createElement( 'p' );
         const address = document.createElement( 'address');
-        address.textContent = shortAddress;
         const slogan = document.createElement( 'span');
+        address.textContent = shortAddress;
         slogan.textContent = tagline;
         paragraph.appendChild(address);
         paragraph.appendChild(slogan);
 
         return(paragraph)
     }
-
-    /* si page courante photographe: transmision du
-    ** paragraphe réalisé par getHeaderPhotographDOM  */
-    if(currentPage === 'Fisheye - photographe') {
-        return { name, picture, getHeaderPhotographDOM };
-    /* si page courante index: transmission de la
-    ** carte réalisée par getUserCardDOM              */
-    }else if(currentPage === 'Fisheye') {
-        return { name, picture, getUserCardDOM };
-    }
+    // retour de la photographer factory
+    return { name, picture, getUserCardDOM };
 }

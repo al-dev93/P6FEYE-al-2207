@@ -3,7 +3,7 @@
         const photographersSection = document.querySelector(".photographer_section");
         const pageName = document.querySelector('title').textContent;
         console.log(pageName);
-
+        // construit les cartes photographes
         photographers.forEach((photographer) => {
             const photographerModel = photographerFactory(photographer, pageName);
             const userCardDOM = photographerModel.getUserCardDOM();
