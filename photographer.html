@@ -5,16 +5,38 @@
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <title>Fisheye - photographe </title>
+    <title>Fisheye - photographe</title>
   </head>
   <body>
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <a href="/">
+        <img src="assets/images/logo.png" class="logo" role="img" alt="Fisheye - Aller à la page d'accueil"/>
+      </a>
     </header>
     <main id="main">
-      <div class="photograph-header">
+      <div class="photograph_header">
+        <article>
+          <h1 id="name"></h1>
+        </article>
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <img src="" alt="">
       </div>
+      <nav class="sort_menu">
+        <label for="sort_select">Trier par</label>
+        <div class="wrapper_select">
+          <span class="dropdown"><img src="assets/icons/dropdown_close.svg" alt=""></span>
+          <select name="sort_select" id="sort_select" multiple>
+            <option value="like" selected>Popularité</option>
+            <option value="date">Date</option>
+            <option value="title">Titre</option>
+          </select>
+        </div>
+      </nav>
+      <div class="media_section"></div>
+      <aside>
+          <span class="number_likes"><img src="assets/icons/favorite-24px-black.svg" alt=""></span>
+          <span class="cost_day"></span>
+      </aside>
     </main>
     <div id="contact_modal">
 			<div class="modal">
@@ -31,6 +53,14 @@
 				</form>
 			</div>
 		</div>
-    <script src="/scripts/utils/contactForm.js"></script>
+    <!-- Api -->
+    <script src="scripts/api/api.js"></script>
+    <!-- Factories -->
+    <script src="scripts/factories/photographer.js"></script>
+    <script src="scripts/factories/media.js"></script>
+    <!-- Pages -->
+    <script src="scripts/pages/photographer.js"></script>
+    <!-- Utils -->
+    <script src="scripts/utils/contactForm.js"></script>
   </body>
 </html>

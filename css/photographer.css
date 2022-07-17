@@ -3,12 +3,52 @@
     display: none;
 }
 
-.photograph-header {
+/* En-tête informations sur le photographe */
+.photograph_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: #FAFAFA;
     height: 300px;
     margin: 0 100px;
+    padding: 0 50px;
 }
-
+.photograph_header h1 {
+    font-size: 64px;
+    line-height: 83px;
+    margin: 0;
+    color: var(--colorLightRed);
+}
+.photograph_header article {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+.photograph_header p {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.photograph_header p address {
+    margin: 0 0 19px 0;
+    font-size: 24px;
+    line-height: 31px;
+    font-style: normal;
+    color: var(--colorRed);
+}
+.photograph_header p span {
+    margin: 0;
+    font-size: 18px;
+    line-height: 23px;
+    color: var(--colorGrey);
+}
+.photograph_header img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
 .contact_button {
     font-size: 20px;
     font-weight: bold;
@@ -17,10 +57,148 @@
     width: 170px;
     height: 70px;
     border: none;
-    background-color: #901C1C;
+    background-color: var(--colorRed);
     border-radius: 5px;
     cursor: pointer;
 }
+
+/* menu de tri des médias */
+.sort_menu {
+    margin: 9px 0 23px 97px;
+    height: 69px;
+    display: flex;
+    align-items:flex-start;
+}
+.sort_menu label {
+    margin: 11px 25px 0 0;
+    width: 74px;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 23px;
+    cursor: pointer;
+}
+.wrapper_select {
+    width: 170px;
+    position: relative;
+}
+.wrapper_select .dropdown {
+    display: block;
+    position: absolute;
+    height: 32px;
+    width: 32px;
+    top: 18px;
+    right: 10px;
+    border-radius: 0px;
+    cursor: pointer;
+}
+.wrapper_select.dropdown_open .dropdown {
+    transform: rotate(180deg);
+}
+.wrapper_select select {
+    -webkit-appearance: none;
+    appearance: none;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    height: 69px;
+    overflow-y: hidden;
+    background-color: var(--colorRed);
+    border: none;
+    border-radius: 5px;
+    padding: 0px 10px;
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 700;
+}
+.wrapper_select.dropdown_open select {
+    height: 170px;
+    padding-top: 9px;
+}
+.wrapper_select select option {
+    box-sizing: border-box;
+    padding: 23px 10px 22px;
+    height: 69px;
+    background-color: transparent;
+    border-bottom: solid 1px transparent;
+    color: var(--colorWhite);
+}
+.wrapper_select.dropdown_open select option {
+    padding: 14px 10px;
+    height: 51px;
+    border-color: var(--colorWhite);
+}
+.wrapper_select.dropdown_open select option:nth-child(3) {
+    border-bottom: transparent;
+}
+
+/*conteneur recevant les médias */
+.media_section{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 95px;
+    row-gap: 30px;
+    margin: 23px 100px 0;
+}
+/* mise en forme des cartes des médias */
+.wrapper_card > img, .wrapper_card video{
+    width: 350px;
+    height: 300px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #c4c4c4;
+}
+.wrapper_card .wrapper_cardinfo{
+    display: flex;
+    justify-content: space-between;
+    height: 31px;
+    width: 350px;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 31px;
+    color: var(--colorRed);
+}
+.wrapper_cardinfo p{
+    margin: 0 10.38px 0 0;
+    
+}
+.wrapper_cardinfo span{
+    display: flex;
+    font-weight: 500;
+}
+.wrapper_cardinfo span img{
+    margin-left: 4.62px;
+    align-self: center;
+}
+
+/* nombre de likes et coût par jour */
+aside {
+    box-sizing: border-box;
+    position: fixed;
+    width: 376px;
+    height: 89px;
+    right: 36px;
+    bottom: -21px;
+    padding: 21px 34px 0 31px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #DB8876;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 31px;
+}
+aside .number_likes {
+    height: 31px;
+    display: flex;
+}
+aside .number_likes img {
+    margin-left: 4.62px;
+    align-self: center;
+}
+.cost_day {
+    height: 31px;
+}
+
 
 .modal {
     border-radius: 5px;
