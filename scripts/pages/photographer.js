@@ -1,4 +1,5 @@
-//Mettre le code JavaScript lié à la page photographer.html
+
+let nameOfPhotograph;
 
 async function displayHeaderData(photographers, id) {
     // nom de la page pour fournir à photographerFactory
@@ -12,6 +13,7 @@ async function displayHeaderData(photographers, id) {
     const img = photographHeader.getElementsByTagName('img').item(0);
     // photographerFactory pour construire l'entête de la page
     const photographerModel = photographerFactory(photographer, pageName);
+    nameOfPhotograph = photographerModel.name;
     const paragraph = photographerModel.getUserCardDOM();
     // insertion du contenu
     h1.textContent = photographerModel.name;
