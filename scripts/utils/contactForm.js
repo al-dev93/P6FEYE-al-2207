@@ -18,3 +18,15 @@ function closeModal() {
     body.removeAttribute('class', 'noscroll');
     modal.style.display = 'none';
 }
+
+const contactForm = document.querySelector('form');
+
+contactForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    console.log('Prénom...:', event.target.surname.value);
+    console.log('Nom......:', event.target.name.value);
+    console.log('Email....:', event.target.mail.value);
+    console.log('Message..:', event.target.message.value);
+    event.target.reset();
+    closeModal();
+});
