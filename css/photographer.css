@@ -1,29 +1,61 @@
+/** déclarations de variables **************/
+
+:root {
+    /* taille des polices ******************/
+    --fontsizePhotographer_hight: 4em;
+    --fontSizePhotographer_small: 2.25em;
+    --fontSizeAddress_hight: 1.5em;
+    --fontSizeAddress_small: 0.813em;
+    --fontSizeSlogan_hight: 1.125em;
+    --fontSizeSlogan_small: 0.625em;
+    --fontSizePrice_small: 0.563em;
+    --fontSizeButton: 1.25em;
+    /* couleurs *****************************/
+    --colorWhite: #FFFFFF;
+    --colorBlack: #000000;
+    --colorRed: #901C1C;
+    --colorLightRed: #D3573C;
+    --colorGrey: #525252;
+    --colorGreyLight: #757575;
+    --colorGreyUltraLight: #FAFAFA;
+    --colorGreyBackgroundCard: #C4C4C4;
+    --colorBackgroundBox: #DB8876;
+    --colorLabelFormModal: #312E2E;
+    /* border-radius ************************/
+    --borderRadius_5px: 5px;
+    --borderRadiusCircle: 50%;
+}
+/********************************************/
 
 #contact_modal {
     display: none;
 }
+
 
 /** En-tête informations sur le photographe */
 .photograph_header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #FAFAFA;
+    background-color: var(--colorGreyUltraLight);
     height: 300px;
     margin: 0 100px;
     padding: 0 50px;
 }
+
 .photograph_header h1 {
-    font-size: 64px;
+    font-size: var(--fontsizePhotographer_hight);
     line-height: 83px;
     margin: 0;
     color: var(--colorLightRed);
 }
+
 .photograph_header article {
     margin: 0;
     display: flex;
     flex-direction: column;
 }
+
 .photograph_header p {
     margin: 0;
     padding: 0;
@@ -31,36 +63,42 @@
     flex-direction: column;
     align-items: flex-start;
 }
+
 .photograph_header p address {
     margin: 0 0 19px 0;
-    font-size: 24px;
+    font-size: var(--fontSizeAddress_hight);
     line-height: 31px;
     font-style: normal;
     color: var(--colorRed);
 }
+
 .photograph_header p span {
     margin: 0;
-    font-size: 18px;
+    font-size: var(--fontSizeSlogan_hight);
     line-height: 23px;
     color: var(--colorGrey);
 }
+
 .photograph_header img {
     width: 200px;
     height: 200px;
-    border-radius: 50%;
+    border-radius: var(--borderRadiusCircle);
+    object-fit: cover;
 }
+
 .contact_button {
-    font-size: 20px;
+    font-size: var(--fontSizeButton);
     font-weight: bold;
-    color: white;
+    color: var(--colorWhite);
     padding: 11px;
     width: 170px;
     height: 70px;
     border: none;
     background-color: var(--colorRed);
-    border-radius: 5px;
+    border-radius: var(--borderRadius_5px);
     cursor: pointer;
 }
+
 
 /** menu de tri des médias */
 .sort_menu {
@@ -69,18 +107,21 @@
     display: flex;
     align-items:flex-start;
 }
+
 .sort_menu label {
     margin: 11px 25px 0 0;
     width: 74px;
-    font-size: 18px;
+    font-size: var(--fontSizeSlogan_hight);
     font-weight: 700;
     line-height: 23px;
     cursor: pointer;
 }
+
 .wrapper_select {
     width: 170px;
     position: relative;
 }
+
 .wrapper_select .dropdown {
     display: block;
     position: absolute;
@@ -91,9 +132,11 @@
     border-radius: 0px;
     cursor: pointer;
 }
+
 .wrapper_select.dropdown_open .dropdown {
     transform: rotate(180deg);
 }
+
 .wrapper_select select {
     -webkit-appearance: none;
     appearance: none;
@@ -104,16 +147,18 @@
     overflow-y: hidden;
     background-color: var(--colorRed);
     border: none;
-    border-radius: 5px;
+    border-radius: var(--borderRadius_5px);
     padding: 0px 10px;
     font-family: inherit;
-    font-size: 18px;
+    font-size: var(--fontSizeSlogan_hight);
     font-weight: 700;
 }
+
 .wrapper_select.dropdown_open select {
     height: 170px;
     padding-top: 9px;
 }
+
 .wrapper_select select option {
     box-sizing: border-box;
     padding: 23px 10px 22px;
@@ -122,16 +167,19 @@
     border-bottom: solid 1px transparent;
     color: var(--colorWhite);
 }
+
 .wrapper_select.dropdown_open select option {
     padding: 14px 10px;
     height: 51px;
     border-color: var(--colorWhite);
 }
+
 .wrapper_select.dropdown_open select option:nth-child(3) {
     border-bottom: transparent;
 }
 
-/** conteneur recevant les médias */
+
+/** conteneur des médias */
 .media_section{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -139,36 +187,40 @@
     row-gap: 30px;
     margin: 23px 100px 0;
 }
+
 /* mise en forme des cartes des médias */
 .wrapper_card > img, .wrapper_card video{
     width: 350px;
     height: 300px;
     margin-bottom: 10px;
-    border-radius: 5px;
-    background-color: #c4c4c4;
+    border-radius: var(--borderRadius_5px);
+    background-color: var(--colorGreyBackgroundCard);
+    object-fit: cover;
 }
+
 .wrapper_card .wrapper_cardinfo{
     display: flex;
     justify-content: space-between;
-    height: 31px;
-    width: 350px;
-    font-size: 24px;
+    font-size: var(--fontSizeAddress_hight);
     font-weight: 400;
     line-height: 31px;
     color: var(--colorRed);
 }
+
 .wrapper_cardinfo p{
     margin: 0 10.38px 0 0;
-    
 }
+
 .wrapper_cardinfo span{
     display: flex;
     font-weight: 500;
 }
+
 .wrapper_cardinfo span img{
-    margin-left: 4.62px;
-    align-self: center;
+    margin: 3px 0 0 4.62px;
+    align-self: flex-start;
 }
+
 
 /** nombre de likes et coût par jour */
 aside {
@@ -181,28 +233,32 @@ aside {
     padding: 21px 34px 0 31px;
     display: flex;
     justify-content: space-between;
-    background-color: #DB8876;
-    border-radius: 5px;
+    background-color: var(--colorBackgroundBox);
+    border-radius: var(--borderRadius_5px);
     font-weight: 500;
-    font-size: 24px;
+    font-size: var(--fontSizeAddress_hight);
     line-height: 31px;
 }
+
 aside .number_likes {
     height: 31px;
     display: flex;
 }
+
 aside .number_likes img {
     margin-left: 4.62px;
     align-self: center;
 }
+
 aside .cost_day {
     height: 31px;
 }
 
-/** modale de contact */
+
+/** modale contenant le formulaire de contact */
 #contact_modal {
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     top: 0;
     left: 0;
     right: 0;
@@ -210,16 +266,20 @@ aside .cost_day {
     background-color: rgba(196, 196, 196, 0.4);
     overflow-y: auto;
 }
+
+/* bloque le scrolling de la page */
 .noscroll {
     overflow: hidden;
 }
+
 .modal {
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    border-radius: 5px;
-    background-color: #DB8876;
+    border-radius: var(--borderRadius_5px);
+    background-color: var(--colorBackgroundBox);
     width: 50%;
     max-width: 669px;
     max-height: 900px;
@@ -240,26 +300,46 @@ aside .cost_day {
     cursor: pointer;
 }
 
-.modal header h2 {
-    font-size: 64px;
+.modal header #header_title {
+    height: 156px;
+}
+
+#header_title h2, #header_title span {
+    font-size: var(--fontsizePhotographer_hight);
     font-weight: normal;
     line-height: 83px;
+} 
+
+.modal header #header_title h2 {
     margin: 0;
 }
-.modal header h2 span {
+
+.modal header #header_title span {
     display: block;
-    margin-top: -10px;
 }
+
+
+/** formulaire de contact  */
 form {
     display: flex;
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
 }
+form input, form textarea {
+    box-sizing: border-box;
+    width: 100%;
+    border: none;
+    border-radius: var(--borderRadius_5px);
+}
+
+form label, form input, form textarea {
+    font-size: var(--fontSizePhotographer_small);
+    line-height: 47px;
+}
 
 form label {
-    color: #312E2E;
-    font-size: 36px;
+    color: var(--colorLabelFormModal);
 }
 
 form div {
@@ -271,15 +351,14 @@ form div {
 }
 
 form input {
-    width: 100%;
     height: 68px;
-    border: none;
-    border-radius: 5px;
+}
+
+#contact_email{
+    margin-bottom: 10px;
 }
 
 form textarea {
-    width: 100%;
     height: 170px;
-    border: none;
-    border-radius: 5px;
+    margin-top: 5px;
 }
