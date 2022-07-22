@@ -21,68 +21,68 @@ function photographerFactory(data, page) {
 
     //* carte photographe pour la page d'accueil
     function getPhotographCard() {
-        // conteneur et lien de la carte
-        const wrapperCard = document.createElement('a');
-        wrapperCard.setAttribute('href', link);
-        wrapperCard.setAttribute('role', 'link');
-        wrapperCard.setAttribute('aria-hidden', 'true');
+        const photographCard = document.createElement('article');       
+        // lien vers la page photographe
+        const photographLink = document.createElement('a');
+        photographLink.setAttribute('href', link);
+        photographLink.setAttribute('role', 'link');
+        // photographLink.setAttribute('aria-label', 'page photographe');
         // corps de la carte
-        const article = document.createElement('article');
-        article.setAttribute('role', 'article');
-        article.setAttribute('aria-hidden', 'false');
-        article.setAttribute('aria-label', 'Cliquez pour voir les réalisations de');
+        const wrapperCard = document.createElement('div');
+        wrapperCard.setAttribute('class', 'wrapper_card');
         // éléments présents sur la carte
-        const title = getNameOfPhotograph();
-        const img = getPhotographImage();
-        const informations = getPhotographInfo(); 
+        const imageCard = getPhotographImage();
+        const infoCard = getPhotographInfo();
         // intégration de la carte
-        article.appendChild(img);
-        article.appendChild(title);
-        article.appendChild(informations);
-        wrapperCard.appendChild(article);
-        return wrapperCard;
+        wrapperCard.appendChild(imageCard);
+        wrapperCard.appendChild(infoCard);
+        photographCard.appendChild(photographLink);
+        photographCard.appendChild(wrapperCard);
+        return photographCard;
     }
 
     //* nom du photographe - titre de la carte
-    function getNameOfPhotograph() {
-        const h2 = document.createElement('h2');
-        h2.textContent = name;
-        return h2;
+    function getPhotographName() {
+        const photographName = document.createElement('h2');
+        photographName.textContent = name;
+        return photographName;
     }
 
     //* image choisie par le photographe pour la page d'accueil
     function getPhotographImage() {
-        const choiceImage = 
-            choicePhotoForHome
+        const choiceImage = choicePhotoForHome
             .find(value => value.id == id)
             .picture;
-        const img = document.createElement('img');
-        img.setAttribute('src', `/assets/media/image/${choiceImage}`);
-        img.setAttribute('role', img);
-        img.setAttribute('alt', "");
-        return img;
+        const photographImage = document.createElement('img');
+        photographImage.setAttribute('src', `/assets/media/image/${choiceImage}`);
+        photographImage.setAttribute('role', 'img');
+        photographImage.setAttribute('alt', "");
+        return photographImage;
     }
 
     //* informations textuelles de la carte
     function getPhotographInfo() {
         // reprend les informations d'entête
-        const paragraph = getHeadPhotographInfo();
-        const cost = document.createElement('span');
-        cost.textContent = pricePerDay;
-        paragraph.appendChild(cost);
-        return paragraph;
+        const photographInfo = getHeadPhotographInfo();
+        const photographName = getPhotographName();
+        const photographCost = document.createElement('p');
+        photographCost.textContent = pricePerDay;
+        photographInfo.appendChild(photographCost);
+        photographInfo.insertAdjacentElement('afterbegin', photographName);
+        return photographInfo;
     }
     
     //* informations d'entête pour la page photographe
     function getHeadPhotographInfo() {
-        const paragraph = document.createElement('p');
-        const address = document.createElement('address');
-        const slogan = document.createElement('span');
-        address.textContent = shortAddress;
-        slogan.textContent = tagline;
-        paragraph.appendChild(address);
-        paragraph.appendChild(slogan);
-        return paragraph;
+        const photographInfo = document.createElement('div');
+        const photographAddress = document.createElement('p');
+        const photographSlogan = document.createElement('p');
+        photographInfo.setAttribute('class', 'info_photograph')
+        photographAddress.textContent = shortAddress;
+        photographSlogan.textContent = tagline;
+        photographInfo.appendChild(photographAddress);
+        photographInfo.appendChild(photographSlogan);
+        return photographInfo;
     }
 
     return {name, picture, getUserCardDOM};

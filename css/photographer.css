@@ -31,8 +31,8 @@
     display: none;
 }
 
-
 /** En-tête informations sur le photographe */
+
 .photograph_header {
     display: flex;
     justify-content: space-between;
@@ -43,20 +43,20 @@
     padding: 0 50px;
 }
 
-.photograph_header h1 {
-    font-size: var(--fontsizePhotographer_hight);
-    line-height: 83px;
-    margin: 0;
-    color: var(--colorLightRed);
-}
-
 .photograph_header article {
     margin: 0;
     display: flex;
     flex-direction: column;
 }
 
-.photograph_header p {
+.photograph_header article h1 {
+    font-size: var(--fontsizePhotographer_hight);
+    line-height: 83px;
+    margin: 0;
+    color: var(--colorLightRed);
+}
+
+.photograph_header .info_photograph {
     margin: 0;
     padding: 0;
     display: flex;
@@ -64,7 +64,7 @@
     align-items: flex-start;
 }
 
-.photograph_header p address {
+.photograph_header article .info_photograph p:first-of-type {
     margin: 0 0 19px 0;
     font-size: var(--fontSizeAddress_hight);
     line-height: 31px;
@@ -72,7 +72,7 @@
     color: var(--colorRed);
 }
 
-.photograph_header p span {
+.photograph_header article .info_photograph p {
     margin: 0;
     font-size: var(--fontSizeSlogan_hight);
     line-height: 23px;
@@ -99,8 +99,8 @@
     cursor: pointer;
 }
 
+/** menu de tri des médias ******************/
 
-/** menu de tri des médias */
 .sort_menu {
     margin: 9px 0 23px 97px;
     height: 69px;
@@ -178,8 +178,9 @@
     border-bottom: transparent;
 }
 
+/** conteneur des médias ********************/
 
-/** conteneur des médias */
+/* conteneur des cartes média ***************/
 .media_section{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -188,41 +189,49 @@
     margin: 23px 100px 0;
 }
 
-/* mise en forme des cartes des médias */
-.wrapper_card > img, .wrapper_card video{
+/* mise en forme des cartes des médias ******/
+.wrapper_mediacard button {
+    background-color: var(--colorGreyBackgroundCard);
+    border-radius: var(--borderRadius_5px);
+    padding: 0;
+    border: none;
     width: 350px;
     height: 300px;
-    margin-bottom: 10px;
+    cursor: pointer;
+}
+.wrapper_mediacard button img, .wrapper_mediacard button video{
+    width: 100%;
+    height: 100%;
     border-radius: var(--borderRadius_5px);
-    background-color: var(--colorGreyBackgroundCard);
     object-fit: cover;
 }
 
-.wrapper_card .wrapper_cardinfo{
+.wrapper_mediacard .wrapper_mediainfo{
     display: flex;
     justify-content: space-between;
+    margin-top: 10px;
     font-size: var(--fontSizeAddress_hight);
     font-weight: 400;
     line-height: 31px;
     color: var(--colorRed);
 }
 
-.wrapper_cardinfo p{
+.wrapper_mediainfo p{
     margin: 0 10.38px 0 0;
 }
 
-.wrapper_cardinfo span{
+.wrapper_mediainfo span{
     display: flex;
     font-weight: 500;
 }
 
-.wrapper_cardinfo span img{
+.wrapper_mediainfo span img{
     margin: 3px 0 0 4.62px;
     align-self: flex-start;
 }
 
-
 /** nombre de likes et coût par jour */
+
 aside {
     box-sizing: border-box;
     position: fixed;

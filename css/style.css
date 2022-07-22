@@ -32,10 +32,40 @@ h1 {
     margin-left: 100px;
 }
 
+.sr-only {
+    border: 0 !important;
+    clip: rect(1px, 1px, 1px, 1px) !important;
+    -webkit-clip-path: inset(50%) !important;
+            clip-path: inset(50%) !important;
+    height: 1px !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    width: 1px !important;
+    white-space: nowrap !important;
+}
 
-/** cartes des photographes ************/
+.sr-only-focusable:focus,
+.sr-only-focusable:active {
+    clip: auto !important;
+    -webkit-clip-path: none !important;
+    clip-path: none !important;
+    height: auto !important;
+    margin: auto !important;
+    overflow: visible !important;
+    width: auto !important;
+    white-space: normal !important;
+    outline: solid 2px var(--colorRed);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
 
-/* conteneur des cartes ****************/
+/** cartes des photographes *****************/
+
+/* conteneur des cartes *********************/
 .photographer_section {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -43,39 +73,64 @@ h1 {
     margin-top: 100px;
 }
 
-/* mise en forme des cartes ************/
+/* mise en forme des cartes *****************/
 .photographer_section article {
+    position: relative;
+}
+
+/* style du lien vers la page photographe ***/
+.photographer_section a {
+    display: block;
+    width: max-content;
+    outline: none;
+}
+
+.photographer_section a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: transparent;
+}
+
+.photographer_section a:focus::before {
+    outline: auto;
+}
+
+/* style du contenu de la carte *************/
+.photographer_section .wrapper_card {
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
+    align-items: center;
 }
 
-.photographer_section article h2 {
-    color: var(--colorLightRed);
-    font-size: var(--fontSizePhotographer_small);
-    font-weight: 400;
-    line-height: 1.306em;
-    margin-bottom: 0;
-}
-
-.photographer_section article img {
+.photographer_section .wrapper_card img {
     height: 200px;
     width: 200px;
+    margin: 0;
     background-color: var(--colorGreyBackgroundCard);
     border-radius: var(--borderRadiusCircle);
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
     object-fit: cover;
 }
 
-.photographer_section article p {
-    margin: 0;
+.photographer_section .wrapper_card .info_photograph {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.photographer_section article p address {
+.photographer_section .info_photograph h2 {
+    color: var(--colorLightRed);
+    font-size: var(--fontSizePhotographer_small);
+    font-weight: 400;
+    line-height: 1.306em;
+    margin: 20px 0 0 0;
+}
+
+.photographer_section .info_photograph p:first-of-type {
     margin: 0 0 3px 0;
     font-size: var(--fontSizeAddress_small);
     font-style: normal;
@@ -83,15 +138,15 @@ h1 {
     color: var(--colorRed);
 }
 
-.photographer_section article p span:nth-child(2) {
-    margin-bottom: 3px;
+.photographer_section .info_photograph p {
+    margin: 0 0 3px 0;
     font-size: var(--fontSizeSlogan_small);
     font-weight: 400;
     line-height: 1.3em;
     color: var(--colorBlack);
 }
 
-.photographer_section article p span:nth-child(3) {
+.photographer_section .info_photograph p:last-of-type {
     margin-bottom: 3px;
     font-size: var(--fontSizePrice_small);
     line-height: 1.333em;
