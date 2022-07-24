@@ -56,7 +56,6 @@ function photographerFactory(data, page) {
         const photographImage = document.createElement('img');
         photographImage.setAttribute('src', `/assets/media/image/${choiceImage}`);
         photographImage.setAttribute('role', 'img');
-        photographImage.setAttribute('alt', "");
         return photographImage;
     }
 

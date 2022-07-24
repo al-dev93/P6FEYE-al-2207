@@ -43,6 +43,7 @@ function mediaFactory(data) {
         const heartIcon = document.createElement('img');
         mediaLikes.textContent = `${likes}`;
         heartIcon.setAttribute('src', `assets/icons/favorite-24px-red.svg`);
+        heartIcon.setAttribute('alt', "Likes");
         mediaLikes.insertAdjacentElement('beforeend', heartIcon)
         return mediaLikes;
     }
