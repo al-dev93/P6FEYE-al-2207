@@ -1,56 +1,80 @@
-//Mettre le code JavaScript lié à la page photographer.html
 
-async function displayHeaderData(photographers, id) {
-    // nom de la page pour fournir à photographerFactory
-    const pageName = document.querySelector('title').textContent;
-    // enregistrement correspondant à l'id du photographe
+// nom de la page pour la photographerFactory
+const pageName = document.querySelector('title').textContent;
+
+// nom du photographe pour récupération dans le formulaire de contact
+let nameOfPhotograph; 
+
+
+// affiche l'ensemble des sections de la page photographe
+async function displayPhotographWebPage(photographers, media, idPhotographer) {
+    const costPerDay = displayDataPhotographer(photographers, idPhotographer);
+    const numberOfLikes = displayMediaPhotographer(media, idPhotographer);
+    displayLikesAndCost(numberOfLikes, costPerDay);
+}
+
+// affichage de l'entête de la page avec les informations sur le photographe
+function displayDataPhotographer(photographers, id) {
+    // datas du photographe correspondant à l'id
     const photographer = photographers.find(value => value.id == id);
-    // cible les éléments pour insérer le retour de la photographerFactory
+    // cible les éléments pour insérer les datas du photographe
     const photographHeader = document.querySelector('.photograph_header');
     const article = photographHeader.getElementsByTagName('article').item(0);
     const h1 = article.getElementsByTagName('h1').item(0);
     const img = photographHeader.getElementsByTagName('img').item(0);
-    // photographerFactory pour construire l'entête de la page
+    // construit l'entête de la page avec la photographerFactory
     const photographerModel = photographerFactory(photographer, pageName);
     const paragraph = photographerModel.getUserCardDOM();
-    // insertion du contenu
-    h1.textContent = photographerModel.name;
+    // insertion du contenu dans la page
+    nameOfPhotograph = photographerModel.name; //enregistre le nom du photographe
+    h1.textContent = nameOfPhotograph;
     img.setAttribute('src', photographerModel.picture);
     article.insertAdjacentElement('beforeend', paragraph);
-    console.log(photographer.price);
-    return photographer.price;
+
+    return photographer.price; 
 }
 
-async function displayMediaPhotographer(medias, id, costPerDay) {
+// affichage des médias du photographe sélectionné
+function displayMediaPhotographer(medias, id) {
     let numberOfLikes = 0;
     // cible la section où insérer les cartes
     const mediaSection = document.querySelector('.media_section');
-    // extrait les médias du photographe sélectionné
+    // extrait les médias du photographe sélectionné dans un array
     const mediaPhotographer = medias.filter(value => value.photographerId == id);
-    // construit les cartes médias
+    // construit les cartes média du photographe
     mediaPhotographer.forEach((media) => {
         const mediaModel = mediaFactory(media);
         const mediaCardDOM = mediaModel.getCardMediaDOM();
         mediaSection.appendChild(mediaCardDOM);
         numberOfLikes += media.likes;
     });
-    // création du cadre nombre de likes et coût journalier
-    const numberLikes = document.querySelector(".number_likes");
-    const costDay = document.querySelector(".cost_day");
-    numberLikes.insertAdjacentText('afterbegin', numberOfLikes);
-    costDay.textContent = `${costPerDay}€ / jour`;
+
+    return numberOfLikes;
 }
 
-async function init() {
-    // récupère l'id du photographe passé en pramètre dans l'url
-    const idPhotographer = new URL(document.location)
+// création du cadre nombre de likes et coût journalier
+function displayLikesAndCost(likes, cost) {
+    const numberOfLikes = document.querySelector(".number_likes");
+    const costPerDay = document.querySelector(".cost_day");
+    numberOfLikes.insertAdjacentText('afterbegin', likes);
+    costPerDay.textContent = `${cost}€ / jour`;
+}
+
+// récupère l'id du photographe passé dans l'URL
+function getIdPhotographer() {
+    return (new URL(document.location)
         .searchParams
-        .get('id');
-    // Récupère les datas des photographes
+        .get('id'));
+}
+
+// initialisation
+async function init() {
+    // récupère les datas des photographes et les médias
     const [{ photographers }, { media }] = await getPhotographers();
-    // affiche l'entête et le cartes médias
-    const costPerDay = await displayHeaderData(photographers, idPhotographer);
-    displayMediaPhotographer(media, idPhotographer, costPerDay);
+    //récupère l'id du photographe passé dans l'URL
+    const idPhotographer = getIdPhotographer();
+    // affiche les datas et les médias du photographe
+    displayPhotographWebPage(photographers, media, idPhotographer);
 }
 
 init();
