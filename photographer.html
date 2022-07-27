@@ -18,7 +18,7 @@
         <article>
           <h1 id="name"></h1>
         </article>
-        <button class="contact_button" onclick="displayModal()" aria-label="Contactez-moi">Contactez-moi</button>
+        <button class="contact_button" onclick="modalContact.openModal()" aria-label="Contactez-moi">Contactez-moi</button>
 
         <img src="" alt="">
       </div>
@@ -39,13 +39,16 @@
           <span class="cost_day"></span>
       </aside>
     </main>
-    <div id="contact_modal" aria-hidden="true" role="dialog" aria-labelledby="modal_title" aria-modal="false">
-			<div class="modal" role="document">
+    <div id="modal" aria-hidden="true" role="dialog" aria-labelledby="modal_title" aria-modal="false">
+		</div>
+    <template id="template_contact">
+      <div id="contact_modal" role="document">
 				<header>
-          <h2 id="modal_title">Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" role="button" alt="Ferme le formulaire de contact" tabindex="0"/>
+          <h2 id="modal_title">Contactez-moi<br></h2>
+          <img class="modal_close" src="assets/icons/close.svg" onclick="modalContact.closeModal()" 
+              role="button" alt="Ferme le formulaire de contact" tabindex="0"/>
         </header>
-				<form action="traitement.php" method="post">
+				<form>
 					<div>
 						<label for="contact_surname">Prénom</label>
 						<input type="text" name="surname" id="contact_surname" required aria-required="true">
@@ -59,9 +62,13 @@
           <button class="contact_button">Envoyer</button>
 				</form>
 			</div>
-		</div>
+    </template>
     <!-- Api -->
     <script src="scripts/api/api.js"></script>
+    <!-- Models -->
+    <script src="/scripts/models/Modal.js"></script>
+    <!-- Builder -->
+    <script src="scripts/builder/ModalBuilder.js"></script>
     <!-- Factories -->
     <script src="scripts/factories/Photographer.js"></script>
     <script src="scripts/factories/Media.js"></script>

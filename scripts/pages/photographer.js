@@ -1,4 +1,6 @@
 
+
+
 // nom de la page pour la photographerFactory
 const pageName = document.querySelector('title').textContent;
 

@@ -3,13 +3,16 @@
 :root {
     /* taille des polices ******************/
     --fontsizePhotographer_hight: 4em;
+    --fontsizeTitleModal: 3.4em;
     --fontSizePhotographer_small: 2.25em;
+    --fontSizeInputModal: 1.9em;
     --fontSizeAddress_hight: 1.5em;
     --fontSizeAddress_small: 0.813em;
     --fontSizeSlogan_hight: 1.125em;
     --fontSizeSlogan_small: 0.625em;
     --fontSizePrice_small: 0.563em;
     --fontSizeButton: 1.25em;
+    --fontSizeButtonModal: 0.951em;
     /* couleurs *****************************/
     --colorWhite: #FFFFFF;
     --colorBlack: #000000;
@@ -79,24 +82,28 @@
     color: var(--colorGrey);
 }
 
+.contact_button {
+    box-sizing: border-box;
+    width: 170px;
+    height: 69px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--fontSizeButton);
+    line-height: 26px;
+    font-weight: bold;
+    color: var(--colorWhite);
+    border: none;
+    background-color: var(--colorRed);
+    border-radius: var(--borderRadius_5px);
+    cursor: pointer;
+}
+
 .photograph_header img {
     width: 200px;
     height: 200px;
     border-radius: var(--borderRadiusCircle);
     object-fit: cover;
-}
-
-.contact_button {
-    font-size: var(--fontSizeButton);
-    font-weight: bold;
-    color: var(--colorWhite);
-    padding: 11px;
-    width: 170px;
-    height: 70px;
-    border: none;
-    background-color: var(--colorRed);
-    border-radius: var(--borderRadius_5px);
-    cursor: pointer;
 }
 
 /** menu de tri des médias ******************/
@@ -265,8 +272,16 @@ aside .cost_day {
 
 
 /** fenêtre modale contenant le formulaire de contact */
-#contact_modal {
+
+/* bloque le scrolling de la page */
+.noscroll {
+    overflow: hidden;
+}
+
+#modal {
     display: none;
+    justify-content: center;
+    align-items: center;
     position: fixed;
     z-index: 2;
     top: 0;
@@ -277,12 +292,7 @@ aside .cost_day {
     overflow-y: auto;
 }
 
-/* bloque le scrolling de la page */
-.noscroll {
-    overflow: hidden;
-}
-
-.modal {
+#contact_modal {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -291,30 +301,30 @@ aside .cost_day {
     border-radius: var(--borderRadius_5px);
     background-color: var(--colorBackgroundBox);
     width: 669px;
-    max-height: 900px;
-    padding: 15px 35px 35px;
-    margin: 10px auto 10px;
+    /* max-height: 900px; */
+    padding: 13px 35px 32px;
+    margin-top: 58px;
 }
 
-.modal header {
+#contact_modal header {
     justify-content: space-between;
     align-items: flex-start;
     width: 100%;
-    margin-bottom: 19px;
+    margin-bottom: 16px;
     height: auto;
 }
 
-.modal header img {
-    margin-top: 20px;
+#contact_modal header img {
+    margin-top: 22px;
     cursor: pointer;
 }
 
-.modal header #modal_title {
-    height: 156px;
+#contact_modal header #modal_title {
+    height: 132px;
     margin: 0;
-    font-size: var(--fontsizePhotographer_hight);
+    font-size: var(--fontsizeTitleModal);
     font-weight: normal;
-    line-height: 83px;
+    line-height: 70px;
 }
 
 /** formulaire de contact  */
@@ -332,8 +342,8 @@ form input, form textarea {
 }
 
 form label, form input, form textarea {
-    font-size: var(--fontSizePhotographer_small);
-    line-height: 47px;
+    font-size: var(--fontSizeInputModal);
+    line-height: 40px;
 }
 
 form label {
@@ -344,19 +354,26 @@ form div {
     display: flex;
     flex-direction: column;
     width: 100%;
-    align-items: self-start;
-    margin-bottom: 26px;
+    /* align-items: self-start; */
+    margin-bottom: 22px;
 }
 
 form input {
-    height: 68px;
+    height: 58px;
 }
 
 #contact_email{
-    margin-bottom: 10px;
+    margin-bottom: 9px;
 }
 
 form textarea {
-    height: 170px;
-    margin-top: 5px;
+    height: 144px;
+    margin-top: 4px;
+}
+
+#contact_modal .contact_button {
+    font-size: var(--fontSizeButtonModal);
+    line-height: 19.5px;
+    width: 170px;
+    height: 58px;
 }

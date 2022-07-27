@@ -10,7 +10,7 @@ function photographerFactory(data, page) {
     function getUserCardDOM() {
         if(currentPage === 'Fisheye - photographe') {
             // pour insertion dans la page photographe
-            return (getHeadPhotographInfo());
+            return (getPhotographHeadInfo());
         } else if(currentPage === 'Fisheye') {
             // pour insertion dans la page d'accueil
             return (getPhotographCard());
@@ -21,24 +21,31 @@ function photographerFactory(data, page) {
 
     //* carte photographe pour la page d'accueil
     function getPhotographCard() {
-        const photographCard = document.createElement('article');       
-        // lien vers la page photographe
+        const card = document.createElement('article');
+        const linkCard = getPhotographPageLink();
+        const wrapperCard = getPhotographWrapperCard();     
+        card.appendChild(linkCard);
+        card.appendChild(wrapperCard);
+        return card;
+    }
+
+    //* lien vers la page du photographe
+    function getPhotographPageLink() {
         const photographLink = document.createElement('a');
         photographLink.setAttribute('href', link);
         photographLink.setAttribute('role', 'link');
-        // photographLink.setAttribute('aria-label', 'page photographe');
-        // corps de la carte
+        return photographLink;
+    }
+
+    //* corps de la carte photographe
+    function getPhotographWrapperCard() {
         const wrapperCard = document.createElement('div');
-        wrapperCard.setAttribute('class', 'wrapper_card');
-        // éléments présents sur la carte
         const imageCard = getPhotographImage();
         const infoCard = getPhotographInfo();
-        // intégration de la carte
+        wrapperCard.setAttribute('class', 'wrapper_card');
         wrapperCard.appendChild(imageCard);
         wrapperCard.appendChild(infoCard);
-        photographCard.appendChild(photographLink);
-        photographCard.appendChild(wrapperCard);
-        return photographCard;
+        return wrapperCard;
     }
 
     //* nom du photographe - titre de la carte
@@ -61,8 +68,8 @@ function photographerFactory(data, page) {
 
     //* informations textuelles de la carte
     function getPhotographInfo() {
-        // reprend les informations d'entête
-        const photographInfo = getHeadPhotographInfo();
+        // ajoute le nom et le coût aux infos d'en-tête
+        const photographInfo = getPhotographHeadInfo();
         const photographName = getPhotographName();
         const photographCost = document.createElement('p');
         photographCost.textContent = pricePerDay;
@@ -72,7 +79,7 @@ function photographerFactory(data, page) {
     }
     
     //* informations d'entête pour la page photographe
-    function getHeadPhotographInfo() {
+    function getPhotographHeadInfo() {
         const photographInfo = document.createElement('div');
         const photographAddress = document.createElement('p');
         const photographSlogan = document.createElement('p');

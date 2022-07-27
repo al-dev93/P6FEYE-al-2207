@@ -3,33 +3,32 @@ function mediaFactory(data) {
     
     //* méthode de création de la carte média
     function getCardMediaDOM() {
-        // conteneur de la carte
-        const wrapperCard = document.createElement('div');
-        wrapperCard.setAttribute('class', 'wrapper_mediacard');
+        const card = document.createElement('div');
         // éléments présents sur la carte
-        let mediaPicture;
         const informations = getMediaInfo();
+        let mediaPicture;
+
         if(data.hasOwnProperty('image')) {
-            mediaPicture = getMediaPicture(data.image, 'image', 'img');
+            mediaPicture = getMediaLinkedPicture(data.image, 'image', 'img');
         } else if(data.hasOwnProperty('video')) {
-            mediaPicture = getMediaPicture(data.video, 'video', 'video')
+            mediaPicture = getMediaLinkedPicture(data.video, 'video', 'video')
         } else {
             throw new Error("il n'y a pas de format de média affichable");
         }
+        card.setAttribute('class', 'wrapper_mediacard');
         //intègre la carte média
-        wrapperCard.appendChild(mediaPicture);
-        wrapperCard.appendChild(informations);
-        return wrapperCard;
+        card.appendChild(mediaPicture);
+        card.appendChild(informations);
+        return card;
     }
 
     //* intègre les informations
     function getMediaInfo() {
-        // conteneur des informations
         const wrapperInfoCard = document.createElement('div');
-        wrapperInfoCard.setAttribute('class', 'wrapper_mediainfo');
         // éléments présents dans les informations
         const titleCard = document.createElement('p');
         const mediaLikes = getMediaLikes();
+        wrapperInfoCard.setAttribute('class', 'wrapper_mediainfo');
         titleCard.textContent = title;
         // intégration des informations
         wrapperInfoCard.appendChild(titleCard);
@@ -48,18 +47,24 @@ function mediaFactory(data) {
         return mediaLikes;
     }
 
+    //* lien d'ouverture de la lightbox
+    function getLinkedLightBox() {
+        const clickCardPicture = document.createElement('button');
+        clickCardPicture.setAttribute('role', 'link');
+        clickCardPicture.setAttribute('aria-label', 'Ouverture de la lightbox');
+        return clickCardPicture;
+    }
+
     //* récupère l'image et créé la balise
-    function getMediaPicture(picture, media, tag) {
-        const clickCardImage = document.createElement('button')
+    function getMediaLinkedPicture(picture, media, tag) {
         const cardImage = document.createElement(tag);
-        clickCardImage.setAttribute('role', 'link');
-        clickCardImage.setAttribute('aria-label', 'Ouverture de la lightbox');
+        const linkedLightBox = getLinkedLightBox();
         cardImage.setAttribute('src', `assets/media/${media}/${picture}`);
         cardImage.setAttribute('alt', "");
         cardImage.setAttribute('tabindex', "-1");
-        clickCardImage.appendChild(cardImage);
-        return(clickCardImage);
+        linkedLightBox.appendChild(cardImage);
+        return(linkedLightBox);
     }
-
+    
     return {getCardMediaDOM};
 }
