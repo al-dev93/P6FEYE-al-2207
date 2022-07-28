@@ -35,17 +35,17 @@
       </nav>
       <div class="media_section"></div>
       <aside>
-          <span class="number_likes"><img src="assets/icons/favorite-24px-black.svg" alt=""></span>
+          <span class="number_likes"><img src="assets/icons/heart_black.svg" alt=""></span>
           <span class="cost_day"></span>
       </aside>
     </main>
     <div id="modal" aria-hidden="true" role="dialog" aria-labelledby="modal_title" aria-modal="false">
 		</div>
-    <template id="template_contact">
+    <template id="contact_template">
       <div id="contact_modal" role="document">
 				<header>
           <h2 id="modal_title">Contactez-moi<br></h2>
-          <img class="modal_close" src="assets/icons/close.svg" onclick="modalContact.closeModal()" 
+          <img class="modal_close" src="assets/icons/close_white.svg" onclick="modalContact.closeModal()" 
               role="button" alt="Ferme le formulaire de contact" tabindex="0"/>
         </header>
 				<form>
@@ -63,6 +63,22 @@
 				</form>
 			</div>
     </template>
+    <template id="lightbox_template">
+      <div id="lightbox_modal" role="document">
+        <div class="wrapper_ctrl_right">
+          <img class="modal_close" src="assets/icons/close_red.svg" onclick="lightbox.closeModal()" 
+              role="button" alt="Ferme la lightbox" tabindex="0"/>
+          <img class="ctrl_right" src="assets/icons/next.svg" alt="" tabindex="0">
+        </div>
+        <div class="lightbox_body">
+          <div class="lightbox_media">
+            <img src="" alt="">
+          </div>
+          <p id="modal_title"></p>
+        </div>
+        <img class="ctrl_left" src="assets/icons/prev.svg" alt="" tabindex="0">
+      </div>
+    </template>
     <!-- Api -->
     <script src="scripts/api/api.js"></script>
     <!-- Models -->
@@ -77,6 +93,7 @@
     <!-- <script src="scripts/pages/index.js"></script> -->
     <!-- Utils -->
     <script src="scripts/utils/contactForm.js"></script>
+    <script src="scripts/utils/lightbox.js"></script>
     <script src="scripts/utils/menuSortMedia.js"></script>
   </body>
 </html>

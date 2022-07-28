@@ -41,7 +41,7 @@ function mediaFactory(data) {
         const mediaLikes = document.createElement('span');
         const heartIcon = document.createElement('img');
         mediaLikes.textContent = `${likes}`;
-        heartIcon.setAttribute('src', `assets/icons/favorite-24px-red.svg`);
+        heartIcon.setAttribute('src', `assets/icons/heart_red.svg`);
         heartIcon.setAttribute('alt', "Likes");
         mediaLikes.insertAdjacentElement('beforeend', heartIcon)
         return mediaLikes;
@@ -50,6 +50,7 @@ function mediaFactory(data) {
     //* lien d'ouverture de la lightbox
     function getLinkedLightBox() {
         const clickCardPicture = document.createElement('button');
+        clickCardPicture.setAttribute('onclick', 'lightbox.openModal()');
         clickCardPicture.setAttribute('role', 'link');
         clickCardPicture.setAttribute('aria-label', 'Ouverture de la lightbox');
         return clickCardPicture;

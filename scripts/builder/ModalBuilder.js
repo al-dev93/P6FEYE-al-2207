@@ -9,11 +9,6 @@ class ModalBuilder {
         return this;
     }
 
-    setIdFocusOut(selector) {
-        this.idFocusOut = selector;
-        return this;
-    }
-
     setIdLastFocus(selector) {
         this.idLastFocus = selector;
         return this;

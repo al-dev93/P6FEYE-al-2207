@@ -1,11 +1,12 @@
 class Modal {
 //* propriétés privées ***************/
-    #modal;
+    #modal; 
     #template;
     // #modalBody;
     #focusIn; //!
     #closeButton;
     #lastFocus;
+    #focusOut;
 //* méthodes privées *****************/
 
     #insertTemplate() {
@@ -27,7 +28,7 @@ class Modal {
 
     #eventHandler(callBack) {
         if(this.#modal.getAttribute('aria-hidden') == 'false') {
-            this.#modal.addEventListener('keydown', (event) => {
+            document.addEventListener('keydown', (event) => {
                 switch (true) {
                     case event.key === 'Tab':
                         this.#setNextFocusElement(event);
@@ -43,7 +44,7 @@ class Modal {
                         return;
                 }
             });
-            if(callback) {
+            if(callBack) {
                 const idTarget = this.#modal.querySelector(this.eventModalFunction.id);
                 idTarget.addEventListener(this.eventModalFunction.type, function(event){callBack(event)});
             }
@@ -67,8 +68,7 @@ class Modal {
     constructor(builder) {
         this.idModalBody = builder.idModalBody;
         this.idTemplate = builder.idTemplate;
-        this.eventModalFunction = builder.eventModalFunction;
-        this.idFocusOut = builder.idFocusOut;
+        this.eventModalFunction = (builder.eventModalFunction)? builder.eventModalFunction : false;
         this.idLastFocus = builder.idLastFocus;
         this.idModal = (builder.idModal)? builder.idModal : 'modal';
         this.idCloseButton = (builder.idCloseButton)? builder.idCloseButton : '.modal_close';
@@ -82,6 +82,7 @@ class Modal {
     }
 
     openModal() {
+        this.#focusOut = document.activeElement;
         document
             .getElementById('main')
             .setAttribute('aria-hidden', 'true');
@@ -103,12 +104,10 @@ class Modal {
         document
             .querySelector('body')
             .removeAttribute('class', 'noscroll');
-        document
-            .querySelector(this.idFocusOut)
-            .focus();
         this.#modal.setAttribute('aria-hidden', 'true');
         this.#modal.setAttribute('aria-modal', 'false');
         this.#modal.style.display = 'none'
         this.#modal.innerHTML = "";
+        this.#focusOut.focus();
     }
 }

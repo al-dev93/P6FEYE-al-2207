@@ -292,6 +292,11 @@ aside .cost_day {
     overflow-y: auto;
 }
 
+#modal .modal_close {
+    margin-top: 22px;
+    cursor: pointer;
+}
+
 #contact_modal {
     box-sizing: border-box;
     display: flex;
@@ -301,7 +306,6 @@ aside .cost_day {
     border-radius: var(--borderRadius_5px);
     background-color: var(--colorBackgroundBox);
     width: 669px;
-    /* max-height: 900px; */
     padding: 13px 35px 32px;
     margin-top: 58px;
 }
@@ -312,11 +316,6 @@ aside .cost_day {
     width: 100%;
     margin-bottom: 16px;
     height: auto;
-}
-
-#contact_modal header img {
-    margin-top: 22px;
-    cursor: pointer;
 }
 
 #contact_modal header #modal_title {
@@ -354,7 +353,6 @@ form div {
     display: flex;
     flex-direction: column;
     width: 100%;
-    /* align-items: self-start; */
     margin-bottom: 22px;
 }
 
@@ -377,3 +375,60 @@ form textarea {
     width: 170px;
     height: 58px;
 }
+
+
+/** lightbox  */
+
+#lightbox_modal {
+    display: flex;
+    background-color: var(--colorWhite);
+    padding:62px 195px 19px;
+    z-index: 3;
+}
+
+#lightbox_modal .ctrl_left, #lightbox_modal .ctrl_right {
+    cursor: pointer;
+}
+
+#lightbox_modal .ctrl_left {
+    align-self: center;
+    order: -1;
+}
+
+#lightbox_modal .lightbox_body {
+    display: flex;
+    flex-direction: column;
+
+}
+
+#lightbox_modal .lightbox_media {
+    width: 1050px;
+    height: 900px;
+    margin-bottom: 12px;
+    border-radius: var(--borderRadius_5px);
+    background-color: var(--colorGreyBackgroundCard);
+}
+
+#lightbox_modal #modal_title {
+    align-self: flex-start;
+    color: var(--colorRed);
+    font-size: var(--fontSizeAddress_hight);
+    line-height: 31px;
+}
+
+#lightbox_modal .wrapper_ctrl_right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    order: 2;
+}
+
+#lightbox_modal .ctrl_right {
+    margin-top: 369px;
+}
+
+#lightbox_modal .modal_close {
+    width: 42px;
+    margin-top: 15px;
+}
+
