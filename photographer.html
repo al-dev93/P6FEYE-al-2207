@@ -19,7 +19,6 @@
           <h1 id="name"></h1>
         </article>
         <button class="contact_button" onclick="modalContact.openModal()" aria-label="Contactez-moi">Contactez-moi</button>
-
         <img src="" alt="">
       </div>
       <nav class="sort_menu">
@@ -35,7 +34,7 @@
       </nav>
       <div class="media_section"></div>
       <aside>
-          <span class="number_likes"><img src="assets/icons/heart_black.svg" alt=""></span>
+          <span class="likes_number"><img src="assets/icons/heart_black.svg" alt=""></span>
           <span class="cost_day"></span>
       </aside>
     </main>
@@ -66,19 +65,21 @@
     <template id="lightbox_template">
       <div id="lightbox_modal" role="document">
         <div class="wrapper_ctrl_right">
-          <img class="modal_close" src="assets/icons/close_red.svg" onclick="lightbox.closeModal()" 
+          <img class="modal_close" src="assets/icons/close_red.svg" onclick="modalLightbox.closeModal()" 
               role="button" alt="Ferme la lightbox" tabindex="0"/>
-          <img class="ctrl_right" src="assets/icons/next.svg" alt="" tabindex="0">
+          <img class="ctrl_right" src="assets/icons/next.svg" role="button" alt="" tabindex="0">
         </div>
         <div class="lightbox_body">
           <div class="lightbox_media">
-            <img src="" alt="">
+            <!--NOTE: insertion du média  -->
           </div>
-          <p id="modal_title"></p>
+          <p class="media_title" ></p>
         </div>
-        <img class="ctrl_left" src="assets/icons/prev.svg" alt="" tabindex="0">
+        <img class="ctrl_left" src="assets/icons/prev.svg" role="button" alt="" tabindex="0">
       </div>
     </template>
+
+    
     <!-- Api -->
     <script src="scripts/api/api.js"></script>
     <!-- Models -->
@@ -90,10 +91,10 @@
     <script src="scripts/factories/Media.js"></script>
     <!-- Pages -->
     <script src="scripts/pages/photographer.js"></script>
-    <!-- <script src="scripts/pages/index.js"></script> -->
     <!-- Utils -->
     <script src="scripts/utils/contactForm.js"></script>
     <script src="scripts/utils/lightbox.js"></script>
     <script src="scripts/utils/menuSortMedia.js"></script>
+    
   </body>
 </html>

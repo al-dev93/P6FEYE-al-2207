@@ -29,6 +29,11 @@ class ModalBuilder {
         return this;
     }
 
+    setCtrlKeyList(list) {
+        this.ctrlKeyList = list;
+        return this;
+    }
+    
     setModalFunction(object) {
         this.eventModalFunction = object;
         return this;
