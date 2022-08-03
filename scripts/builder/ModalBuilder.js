@@ -24,10 +24,10 @@ class ModalBuilder {
         return this;
     }
 
-    setIdModalTitle(selector) {
-        this.idModalTitle = selector;
-        return this;
-    }
+    // setIdModalTitle(selector) {
+    //     this.idModalTitle = selector;
+    //     return this;
+    // }
 
     setCtrlKeyList(list) {
         this.ctrlKeyList = list;

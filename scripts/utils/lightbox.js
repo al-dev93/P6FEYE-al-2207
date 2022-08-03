@@ -1,39 +1,47 @@
-// déclaration de la callback 
-function ctrlKeyCallback(key, size, index) { 
-    switch (key) {
-        case 'ctrl_right' :
-            if(index < size-1) {
-                index++;
-            } else if(index == size-1) {
-                index = 0;
-            }
-            break;
-        case 'ctrl_left' :
-            if(index > 0 ) {
-                index--;
-            } else if(index == 0) {
-                index = size-1;
-            }
-            break;
 
-        default:
-            break;
+
+function displayMedia(mode, currentIndex, lastIndex, parent = document.querySelector('.lightbox_body')) {
+    if(mode === 'slide') {
+        parent
+            .getElementsByClassName('lightbox_item')
+            .item(lastIndex)
+            .classList
+            .toggle('is-hidden');
+        parent
+            .getElementsByClassName('lightbox_item')
+            .item(currentIndex)
+            .classList
+            .toggle('is-hidden');
     }
-    console.log(index)
-    return index;
+    if(mode === 'on') {
+        parent
+            .getElementsByClassName('lightbox_item')
+            .item(currentIndex)
+            .classList
+            .remove('is-hidden');
+    }
+    if(mode === 'off') {
+        parent
+            .getElementsByClassName('lightbox_item')
+            .item(currentIndex)
+            .classList
+            .add('is-hidden');
+    }
 }
 
-// object définissanr la callback submit
-const ctrlSlideObject = {
-    name : 'slide',     // élément ciblé pour l'évènement
-    type : 'keydown&click', // type d'évènement
-    callback : ctrlKeyCallback
-}
+
+
+// // object définissanr la callback submit
+// const ctrlSlideObject = {
+//     name : 'slide',     // élément ciblé pour l'évènement
+//     type : 'keydown&click', // type d'évènement
+//     callback : displayMedia
+// }
 
 // builder pour la lightbox
 const modalLightbox = new ModalBuilder('lightbox_modal', 'lightbox_template') // ciblage du conteneur et du template
     .setIdLastFocus('.ctrl_left')
     // .setIdModalTitle(['.media_title',false])
     .setCtrlKeyList({next:'.ctrl_right', prev:'.ctrl_left'})
-    .setModalFunction(ctrlSlideObject)
+    .setModalFunction(displayMedia)
     .buildModal(); // création de la lightbox

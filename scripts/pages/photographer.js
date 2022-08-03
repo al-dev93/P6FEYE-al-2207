@@ -6,6 +6,40 @@ const photographId = new URL(document.location)
                         .searchParams
                         .get('id');
 
+// créé le contenu de la lightbox
+function createLightbox(works) {
+    const lightbox = [];
+    for(element in works) {
+        // eléments de la lightbox
+        const item = document.createElement('li');
+        const media = document.createElement('div');
+        const title = document.createElement('p');
+        let contentMedia;
+
+        item.classList.add('lightbox_item', 'is-hidden');
+        item.setAttribute('data-item', `${element}`);
+        item.setAttribute('data-id', `${works[element].id}`)
+        item.setAttribute('aria-hidden', 'false');
+        media.setAttribute('class', 'lightbox_media');
+        title.setAttribute('class', 'media_title');
+
+        if(works[element].image) {
+            contentMedia = document.createElement('img');
+            contentMedia.setAttribute('src', `assets/media/image/${works[element].image}`);
+        } else if(works[element].video) {
+            contentMedia = document.createElement('video');
+            contentMedia.setAttribute('src', `assets/media/video/${works[element].video}`);
+        }
+
+        media.appendChild(contentMedia);
+        title.textContent = works[element].title;
+        item.appendChild(media);
+        item.appendChild(title);
+        lightbox.push(item);
+    }
+    return lightbox;
+}
+
 // affiche l'entête de la page contenant les informations sur le photographe
 function displayHeader(photograph) {
     const header = document.querySelector('.photograph_header');
@@ -55,43 +89,29 @@ function displayLikesSum() {
 }
 
 // distribue l'affichage l'affichage de la page
-function createPhotographPage(photograph, works, lightbox) {
+function createPhotographPage(photograph, works) {
     const photographCost = photograph.price;
-    const photographName = photograph.name;
 
     displayHeader(photograph);
     displayGallery(works);
     displayLikesPanel(photographCost)
-    // transmet le nom du photographe à la modale de contact
-    modalContact.contentModalTitle = photographName;
-    modalLightbox.modalListData = lightbox;
 }
 
 // extrait les données et média du photographe
 function photographMain(photographers, media) {
-    // données sur le photographe
+    // stockage des données sur le photographe
     const photographData = photographers.find(value => value.id == photographId);
-    // média du photographe
+    // stockage des média du photographe
     const worksData = media.filter(value => value.photographerId == photographId);
-    //
-    const lightboxData = [];
-    worksData.forEach(element => {
-        const mediaObjet = {
-            media : (element.hasOwnProperty('image'))? 'image' : 'video',
-            tag : (element.hasOwnProperty('image'))? 'img' : 'video',
-            src : (element.hasOwnProperty('image'))? element.image : element.video,
-            title : element.title
-        }
-        lightboxData.push(mediaObjet);
-    });
+    // stockage des média pour la lightbox
+    const lightboxData = createLightbox(worksData);
 
     // centralise l'affichage de la page
-    createPhotographPage(photographData, worksData, lightboxData);
+    createPhotographPage(photographData, worksData);
 
-    console.log(photographData);
-    console.log(worksData);
-    console.log(lightboxData)
-    // console.log(lightboxData.entries()[0])
+    modalContact.contentModalTitle = photographData.name;
+    modalLightbox.modalListData = lightboxData;
+    modalLightbox.idInsertListData = '.lightbox_body';
 }
 
 // récupération des données

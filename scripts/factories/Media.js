@@ -66,6 +66,7 @@ function mediaFactory(data) {
         cardImage.setAttribute('alt', "");
         cardImage.setAttribute('tabindex', "-1");
         cardImage.setAttribute('class', 'media_content')
+        cardImage.setAttribute('data-id', id)
         linkedLightBox.appendChild(cardImage);
         return(linkedLightBox);
     }

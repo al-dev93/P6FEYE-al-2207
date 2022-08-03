@@ -396,9 +396,16 @@ form textarea {
 }
 
 #lightbox_modal .lightbox_body {
+    margin: 0;
+    padding: 0;
+}
+
+.lightbox_item {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
     display: flex;
     flex-direction: column;
-
 }
 
 #lightbox_modal .lightbox_media {
@@ -413,7 +420,6 @@ form textarea {
 
 #lightbox_modal .lightbox_media img, #lightbox_modal .lightbox_media video  {
     max-width: 100%;
-    /* max-height: 100%; */
     object-fit: cover;
 }
 
