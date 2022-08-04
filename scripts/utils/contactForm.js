@@ -1,7 +1,5 @@
 
-
-
-// callback de soumission du formulaire 
+// soumission du formulaire 
 function submitContact(event) {
     event.preventDefault();
     console.log('Prénom...:', event.target.surname.value);
@@ -11,16 +9,8 @@ function submitContact(event) {
     event.target.reset();
 }
 
-// object définissant la callback submit
-// const formSubmit = {
-//     name : 'contact',     // élément ciblé pour l'évènement
-//     type : 'submit', // type d'évènement
-//     callback : submitContact
-// }
-
 // builder pour la modale contactez-moi
 const modalContact = new ModalBuilder('contact_modal', 'contact_template') // ciblage du conteneur et du template
     .setIdLastFocus('button[class="contact_button"]') // ciblage du dernier élément de la modale recevant le focus
-    // .setIdModalTitle('modal_title')
     .setModalFunction(submitContact) // transmission de l'objet de définition de la callback
     .buildModal(); // création de la modale de contact

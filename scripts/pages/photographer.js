@@ -19,16 +19,19 @@ function createLightbox(works) {
         item.classList.add('lightbox_item', 'is-hidden');
         item.setAttribute('data-item', `${element}`);
         item.setAttribute('data-id', `${works[element].id}`)
-        item.setAttribute('aria-hidden', 'false');
+        item.setAttribute('aria-hidden', 'true');
+        item.setAttribute('aria-label', `${Number(element)+1}`+` sur ${works.length}`);
         media.setAttribute('class', 'lightbox_media');
         title.setAttribute('class', 'media_title');
 
         if(works[element].image) {
             contentMedia = document.createElement('img');
             contentMedia.setAttribute('src', `assets/media/image/${works[element].image}`);
+            contentMedia.setAttribute('alt', "");
         } else if(works[element].video) {
             contentMedia = document.createElement('video');
             contentMedia.setAttribute('src', `assets/media/video/${works[element].video}`);
+            contentMedia.setAttribute('controls', "")
         }
 
         media.appendChild(contentMedia);
