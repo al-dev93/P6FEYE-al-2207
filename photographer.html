@@ -19,7 +19,6 @@
           <h1 id="name"></h1>
         </article>
         <button class="contact_button" onclick="modalContact.openModal()" aria-label="Contactez-moi">Contactez-moi</button>
-
         <img src="" alt="">
       </div>
       <nav class="sort_menu">
@@ -35,20 +34,23 @@
       </nav>
       <div class="media_section"></div>
       <aside>
-          <span class="number_likes"><img src="assets/icons/favorite-24px-black.svg" alt=""></span>
+          <span class="likes_number"><img src="assets/icons/heart_black.svg" alt="Likes"></span>
           <span class="cost_day"></span>
       </aside>
     </main>
     <div id="modal" aria-hidden="true" role="dialog" aria-labelledby="modal_title" aria-modal="false">
+      <!-- NOTE: insertion du contenu de la modale  -->
 		</div>
-    <template id="template_contact">
+    <!-- NOTE: teplate pour le formulaire de contact qui sera inséré dans la modale -->
+    <template id="contact_template">
       <div id="contact_modal" role="document">
 				<header>
+          <!--NOTE: mise à jour du titre  -->
           <h2 id="modal_title">Contactez-moi<br></h2>
-          <img class="modal_close" src="assets/icons/close.svg" onclick="modalContact.closeModal()" 
+          <img class="modal_close" src="assets/icons/close_white.svg" onclick="modalContact.closeModal()" 
               role="button" alt="Ferme le formulaire de contact" tabindex="0"/>
         </header>
-				<form>
+				<form action="">
 					<div>
 						<label for="contact_surname">Prénom</label>
 						<input type="text" name="surname" id="contact_surname" required aria-required="true">
@@ -59,10 +61,27 @@
             <label for="contact_message">Votre message</label>
             <textarea name="message" id="contact_message" required aria-required="true"></textarea>
 					</div>
-          <button class="contact_button">Envoyer</button>
+          <button class="contact_button" aria-label="Envoi le formulaire">Envoyer</button>
 				</form>
 			</div>
     </template>
+    <!-- NOTE: template pour la lightbox qui sera inséré dans la modale -->
+    <template id="lightbox_template">
+      <div id="lightbox_modal" role="presentation">
+        <span id="modal_title" class="sr-only">Visualiseur défilable d'images et vidéo</span>
+        <div class="wrapper_ctrl_right">
+          <img class="modal_close" src="assets/icons/close_red.svg" onclick="modalLightbox.closeModal()" 
+              role="button" alt="Ferme la lightbox" tabindex="0"/>
+          <img class="ctrl_right" src="assets/icons/next.svg" role="button" alt="Image suivante" tabindex="0">
+        </div>
+        <ul class="lightbox_body" aria-label="Contenu de la lightbox">
+            <!--NOTE: insertion des média  -->
+        </ul>
+        <img class="ctrl_left" src="assets/icons/prev.svg" role="button" alt="Image précédente" tabindex="0">
+      </div>
+    </template>
+
+    
     <!-- Api -->
     <script src="scripts/api/api.js"></script>
     <!-- Models -->
@@ -74,9 +93,10 @@
     <script src="scripts/factories/Media.js"></script>
     <!-- Pages -->
     <script src="scripts/pages/photographer.js"></script>
-    <!-- <script src="scripts/pages/index.js"></script> -->
     <!-- Utils -->
     <script src="scripts/utils/contactForm.js"></script>
+    <script src="scripts/utils/lightbox.js"></script>
     <script src="scripts/utils/menuSortMedia.js"></script>
+    
   </body>
 </html>

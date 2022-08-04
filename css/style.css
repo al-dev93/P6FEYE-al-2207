@@ -63,6 +63,10 @@ h1 {
     left: 0;
 }
 
+.is-hidden {
+    display: none;
+}
+
 /** cartes des photographes *****************/
 
 /* conteneur des cartes *********************/

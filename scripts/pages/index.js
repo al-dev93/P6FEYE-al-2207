@@ -2,6 +2,7 @@
 const pageName = document.querySelector('title').textContent;
 
 
+
 // affiche les cartes des photographes
 async function displayData(photographers) {
     const photographersSection = document.querySelector(".photographer_section");
@@ -20,5 +21,5 @@ async function init() {
     // affiche les cartes des photographes dans la page
     displayData(photographers);
 }
-    
-    init();
+
+init();

@@ -1,82 +1,126 @@
 
-
-
 // nom de la page pour la photographerFactory
 const pageName = document.querySelector('title').textContent;
+// identifiant du photographe passé en paramètre dans l'URL
+const photographId = new URL(document.location)
+                        .searchParams
+                        .get('id');
 
-// nom du photographe pour récupération dans le formulaire de contact
-let nameOfPhotograph; 
+// créé le contenu de la lightbox
+function createLightbox(works) {
+    const lightbox = [];
+    for(element in works) {
+        // eléments de la lightbox
+        const item = document.createElement('li');
+        const media = document.createElement('div');
+        const title = document.createElement('p');
+        let contentMedia;
 
+        item.classList.add('lightbox_item', 'is-hidden');
+        item.setAttribute('data-item', `${element}`);
+        item.setAttribute('data-id', `${works[element].id}`)
+        item.setAttribute('aria-hidden', 'true');
+        item.setAttribute('aria-label', `${Number(element)+1}`+` sur ${works.length}`);
+        media.setAttribute('class', 'lightbox_media');
+        title.setAttribute('class', 'media_title');
 
-// affiche l'ensemble des sections de la page photographe
-async function displayPhotographWebPage(photographers, media, idPhotographer) {
-    const costPerDay = displayDataPhotographer(photographers, idPhotographer);
-    const numberOfLikes = displayMediaPhotographer(media, idPhotographer);
-    displayLikesAndCost(numberOfLikes, costPerDay);
+        if(works[element].image) {
+            contentMedia = document.createElement('img');
+            contentMedia.setAttribute('src', `assets/media/image/${works[element].image}`);
+            contentMedia.setAttribute('alt', "");
+        } else if(works[element].video) {
+            contentMedia = document.createElement('video');
+            contentMedia.setAttribute('src', `assets/media/video/${works[element].video}`);
+            contentMedia.setAttribute('controls', "")
+        }
+
+        media.appendChild(contentMedia);
+        title.textContent = works[element].title;
+        item.appendChild(media);
+        item.appendChild(title);
+        lightbox.push(item);
+    }
+    return lightbox;
 }
 
-// affichage de l'entête de la page avec les informations sur le photographe
-function displayDataPhotographer(photographers, id) {
-    // datas du photographe correspondant à l'id
-    const photographer = photographers.find(value => value.id == id);
-    // cible les éléments pour insérer les datas du photographe
-    const photographHeader = document.querySelector('.photograph_header');
-    const article = photographHeader.getElementsByTagName('article').item(0);
-    const h1 = article.getElementsByTagName('h1').item(0);
-    const img = photographHeader.getElementsByTagName('img').item(0);
-    // construit l'entête de la page avec la photographerFactory
-    const photographerModel = photographerFactory(photographer, pageName);
-    const paragraph = photographerModel.getUserCardDOM();
-    // insertion du contenu dans la page
-    nameOfPhotograph = photographerModel.name; //enregistre le nom du photographe
-    h1.textContent = nameOfPhotograph;
-    img.setAttribute('src', photographerModel.picture);
-    article.insertAdjacentElement('beforeend', paragraph);
-
-    return photographer.price; 
+// affiche l'entête de la page contenant les informations sur le photographe
+function displayHeader(photograph) {
+    const header = document.querySelector('.photograph_header');
+    const identity = header.getElementsByTagName('article').item(0);
+    const name = identity.getElementsByTagName('h1').item(0);
+    const photo = header.getElementsByTagName('img').item(0);
+    // initialise la photographerFactory
+    const photographFactory = photographerFactory(photograph, pageName);
+    // getUserCardDom de la factory adaptée pour la page photographe
+    const photographInfo = photographFactory.getUserCardDOM();
+    // mise à jour avec les données du photographe
+    name.textContent = photographFactory.name;
+    photo.setAttribute('src', photographFactory.picture);
+    identity.insertAdjacentElement('beforeend', photographInfo);
 }
 
-// affichage des médias du photographe sélectionné
-function displayMediaPhotographer(medias, id) {
-    let numberOfLikes = 0;
-    // cible la section où insérer les cartes
-    const mediaSection = document.querySelector('.media_section');
-    // extrait les médias du photographe sélectionné dans un array
-    const mediaPhotographer = medias.filter(value => value.photographerId == id);
-    // construit les cartes média du photographe
-    mediaPhotographer.forEach((media) => {
-        const mediaModel = mediaFactory(media);
-        const mediaCardDOM = mediaModel.getCardMediaDOM();
-        mediaSection.appendChild(mediaCardDOM);
-        numberOfLikes += media.likes;
+// afiche la gallerie des réalisations du photographe
+function displayGallery(works) {
+    const worksGallery = document.querySelector('.media_section');
+    works.forEach((media) => {
+        const worksFactory = mediaFactory(media);
+        const mediaCardDOM = worksFactory.getCardMediaDOM();
+        worksGallery.appendChild(mediaCardDOM);
     });
-
-    return numberOfLikes;
 }
 
-// création du cadre nombre de likes et coût journalier
-function displayLikesAndCost(likes, cost) {
-    const numberOfLikes = document.querySelector(".number_likes");
-    const costPerDay = document.querySelector(".cost_day");
-    numberOfLikes.insertAdjacentText('afterbegin', likes);
-    costPerDay.textContent = `${cost}€ / jour`;
+// affiche le panneau contenant le nombre de likes et le coût journalier du photographe
+function displayLikesPanel(photographCost) {
+    document
+        .querySelector(".cost_day")
+        .textContent = `${photographCost}€ / jour`;
+    displayLikesSum();
 }
 
-// récupère l'id du photographe passé dans l'URL
-function getIdPhotographer() {
-    return (new URL(document.location)
-        .searchParams
-        .get('id'));
+// calcule la somme des likes et l'affiche dans le panneau
+function displayLikesSum() {
+    const likesList = document.getElementsByClassName('likes');
+    let count = 0;
+    
+    for (const card of likesList) {
+        // count totalise le nombre de likes
+        count += Number(card.textContent);
+    }
+    document
+        .querySelector(".likes_number")
+        .insertAdjacentText('afterbegin', count);
 }
 
-// initialisation
+// distribue l'affichage l'affichage de la page
+function createPhotographPage(photograph, works) {
+    const photographCost = photograph.price;
+
+    displayHeader(photograph);
+    displayGallery(works);
+    displayLikesPanel(photographCost)
+}
+
+// extrait les données et média du photographe
+function photographMain(photographers, media) {
+    // stockage des données sur le photographe
+    const photographData = photographers.find(value => value.id == photographId);
+    // stockage des média du photographe
+    const worksData = media.filter(value => value.photographerId == photographId);
+    // stockage des média pour la lightbox
+    const lightboxData = createLightbox(worksData);
+
+    // centralise l'affichage de la page
+    createPhotographPage(photographData, worksData);
+
+    modalContact.contentModalTitle = photographData.name;
+    modalLightbox.modalListData = lightboxData;
+    modalLightbox.idInsertListData = '.lightbox_body';
+}
+
+// récupération des données
 async function init() {
-    // récupère les datas des photographes et les médias
-    const [{ photographers }, { media }] = await getPhotographers();
-    //récupère l'id du photographe passé dans l'URL
-    const idPhotographer = getIdPhotographer();
-    // affiche les datas et les médias du photographe
-    displayPhotographWebPage(photographers, media, idPhotographer);
+    const [{photographers},{media}] = await getPhotographers();
+    photographMain(photographers, media);
 }
 
-init();
+init(); 
