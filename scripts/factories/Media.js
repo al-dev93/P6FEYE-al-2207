@@ -39,13 +39,18 @@ function mediaFactory(data) {
 
     //* nombre de likes et îcone coeur
     function getMediaLikes() {
-        const mediaLikes = document.createElement('span');
+        const mediaLikes = document.createElement('div')
+        const countLikes = document.createElement('span');
         const heartIcon = document.createElement('img');
-        mediaLikes.textContent = `${likes}`;
         mediaLikes.setAttribute('class', 'likes');
+        mediaLikes.setAttribute('data-isliked', 'false');
+        mediaLikes.setAttribute('tabindex', '0');
         heartIcon.setAttribute('src', `assets/icons/heart_red.svg`);
         heartIcon.setAttribute('alt', "Likes");
-        mediaLikes.insertAdjacentElement('beforeend', heartIcon)
+        countLikes.textContent = `${likes}`;
+        mediaLikes.appendChild(countLikes);
+        mediaLikes.appendChild(heartIcon);
+        setOnLikeEvent(mediaLikes);
         return mediaLikes;
     }
 
@@ -71,5 +76,15 @@ function mediaFactory(data) {
         return(linkedLightBox);
     }
     
+    // function setOnLikeEvent(element) {
+    //     const countLikes = element.querySelector('span');
+    //     element.addEventListener('click', () => {
+    //         if(element.getAttribute('data-isliked') === 'false') {
+    //             countLikes.textContent = `${Number(countLikes.textContent)+1}`;
+    //             element.setAttribute('data-isliked', 'true');
+    //         }
+    //     });
+    //}
+
     return {getCardMediaDOM};
 }

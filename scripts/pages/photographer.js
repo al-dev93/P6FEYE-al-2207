@@ -77,18 +77,15 @@ function displayLikesPanel(photographCost) {
     displayLikesSum();
 }
 
-// calcule la somme des likes et l'affiche dans le panneau
+// affiche et met à jour la somme des likes dans le panneau
 function displayLikesSum() {
-    const likesList = document.getElementsByClassName('likes');
-    let count = 0;
-    
-    for (const card of likesList) {
-        // count totalise le nombre de likes
-        count += Number(card.textContent);
-    }
-    document
-        .querySelector(".likes_number")
-        .insertAdjacentText('afterbegin', count);
+    const likesSum = document.getElementById("likes_sum");
+
+    likesSum.textContent = getSum();
+
+    likesSum.addEventListener('liked', () => {
+        likesSum.textContent = getSum();
+    });
 }
 
 // distribue l'affichage l'affichage de la page
@@ -124,3 +121,7 @@ async function init() {
 }
 
 init(); 
+
+
+
+
