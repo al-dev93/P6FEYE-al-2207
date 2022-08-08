@@ -125,11 +125,14 @@ class Modal {
         // fixe la position courante dans la lightbox à l'ouverture
         #initLightbox() {
             const listIndex = this.#modalBody.getElementsByClassName('lightbox_item');
-            const focusOut = (this.#focusOut.tagName !== 'IMG' && this.#focusOut.tagName !== 'VIDEO')?
-                                this.#focusOut.firstElementChild : this.#focusOut;
+            //! const focusOut = (this.#focusOut.tagName !== 'IMG' && this.#focusOut.tagName !== 'VIDEO')?
+            //!                     this.#focusOut.firstElementChild : this.#focusOut;
+            const focusOut = (this.#focusOut.tagName === 'BUTTON')?
+                                this.#focusOut : this.#focusOut.parentNode;
+            console.log(focusOut)
             // position courante est celle du media activé pour l'ouverture
             for (const element of listIndex) {
-                if(element.getAttribute('data-id') === focusOut.getAttribute('data-id')) {
+                if(element.getAttribute('data-item') === focusOut.getAttribute('data-item')) {
                     this.#currentIndex = Number(element.getAttribute('data-item'));
                     break;
                 }

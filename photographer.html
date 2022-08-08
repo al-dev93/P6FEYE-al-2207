@@ -30,9 +30,9 @@
         <div class="wrapper_select">
           <span class="dropdown"><img src="assets/icons/dropdown_close.svg" alt=""></span>
           <select name="sort_select" id="sort_select" multiple>
-            <option value="like" selected>Popularité</option>
-            <option value="date">Date</option>
-            <option value="title">Titre</option>
+            <option value="like" onclick="init('popularity')" selected>Popularité</option>
+            <option value="date" onclick="init('date')">Date</option>
+            <option value="title" onclick="init('title')">Titre</option>
           </select>
         </div>
       </nav>
@@ -108,6 +108,7 @@
     <script src="scripts/utils/lightbox.js"></script>
     <script src="scripts/utils/menuSortMedia.js"></script>
     <script src="scripts/utils/likeMedia.js"></script>
+    <script src="scripts/utils/sortMedia.js"></script>
     
   </body>
 </html>

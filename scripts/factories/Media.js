@@ -1,5 +1,5 @@
-function mediaFactory(data) {
-    const {id, title, likes, price} = data;
+function mediaFactory(data, index) {
+    const {id, title, likes, date} = data;
     
     //* méthode de création de la carte média
     function getCardMediaDOM() {
@@ -19,6 +19,8 @@ function mediaFactory(data) {
         //intègre la carte média
         card.appendChild(mediaPicture);
         card.appendChild(informations);
+        //! arraySortMedia.push({item: index, title: title, date: date, likes: likes});
+        
         return card;
     }
 
@@ -50,7 +52,7 @@ function mediaFactory(data) {
         countLikes.textContent = `${likes}`;
         mediaLikes.appendChild(countLikes);
         mediaLikes.appendChild(heartIcon);
-        setOnLikeEvent(mediaLikes);
+        setOnLikeEvent(mediaLikes, id);
         return mediaLikes;
     }
 
@@ -60,6 +62,7 @@ function mediaFactory(data) {
         clickCardPicture.setAttribute('onclick', 'modalLightbox.openModal()');
         clickCardPicture.setAttribute('role', 'link');
         clickCardPicture.setAttribute('aria-label', 'Ouverture de la lightbox');
+        clickCardPicture.setAttribute('data-item', `${index}`)
         return clickCardPicture;
     }
 
@@ -71,20 +74,9 @@ function mediaFactory(data) {
         cardImage.setAttribute('alt', "");
         cardImage.setAttribute('tabindex', "-1");
         cardImage.setAttribute('class', 'media_content')
-        cardImage.setAttribute('data-id', id)
+        //! cardImage.setAttribute('data-id', id)
         linkedLightBox.appendChild(cardImage);
         return(linkedLightBox);
     }
-    
-    // function setOnLikeEvent(element) {
-    //     const countLikes = element.querySelector('span');
-    //     element.addEventListener('click', () => {
-    //         if(element.getAttribute('data-isliked') === 'false') {
-    //             countLikes.textContent = `${Number(countLikes.textContent)+1}`;
-    //             element.setAttribute('data-isliked', 'true');
-    //         }
-    //     });
-    //}
-
     return {getCardMediaDOM};
 }

@@ -18,7 +18,7 @@ function createLightbox(works) {
 
         item.classList.add('lightbox_item', 'is-hidden');
         item.setAttribute('data-item', `${element}`);
-        item.setAttribute('data-id', `${works[element].id}`)
+        //! item.setAttribute('data-id', `${works[element].id}`)
         item.setAttribute('aria-hidden', 'true');
         item.setAttribute('aria-label', `${Number(element)+1}`+` sur ${works.length}`);
         media.setAttribute('class', 'lightbox_media');
@@ -62,15 +62,17 @@ function displayHeader(photograph) {
 // afiche la gallerie des réalisations du photographe
 function displayGallery(works) {
     const worksGallery = document.querySelector('.media_section');
+    let index = 0;
     works.forEach((media) => {
-        const worksFactory = mediaFactory(media);
+        const worksFactory = mediaFactory(media, index);
         const mediaCardDOM = worksFactory.getCardMediaDOM();
         worksGallery.appendChild(mediaCardDOM);
+        index++;
     });
 }
 
 // affiche le panneau contenant le nombre de likes et le coût journalier du photographe
-function displayLikesPanel(photographCost) {
+function displayCostAndLikesPanel(photographCost) {
     document
         .querySelector(".cost_day")
         .textContent = `${photographCost}€ / jour`;
@@ -90,34 +92,54 @@ function displayLikesSum() {
 
 // distribue l'affichage l'affichage de la page
 function createPhotographPage(photograph, works) {
-    const photographCost = photograph.price;
-
     displayHeader(photograph);
     displayGallery(works);
-    displayLikesPanel(photographCost)
+    displayCostAndLikesPanel(photograph.price);
 }
 
-// extrait les données et média du photographe
-function photographMain(photographers, media) {
-    // stockage des données sur le photographe
-    const photographData = photographers.find(value => value.id == photographId);
+function updatePhotographPage(media, sort) {
     // stockage des média du photographe
     const worksData = media.filter(value => value.photographerId == photographId);
-    // stockage des média pour la lightbox
-    const lightboxData = createLightbox(worksData);
+    document
+        .querySelector('.media_section')
+        .innerHTML = "";
+    
+    if(arrayLikesUpdate) {
+        updateWorkDataLikes(worksData);
+    }
 
-    // centralise l'affichage de la page
-    createPhotographPage(photographData, worksData);
+    sortMedia(worksData, sort);
+    console.log(worksData);
 
+    modalLightbox.modalListData = createLightbox(worksData);
+
+    displayGallery(worksData);
+}
+
+// créé les structures de données média et photographe
+function photographMain(photographers, media) {
+    // stockage des média du photographe
+    const worksData = media.filter(value => value.photographerId == photographId);
+    // stockage des données sur le photographe
+    const photographData = photographers.find(value => value.id == photographId);
+    
+    // création des objets modales contact et lightbox
     modalContact.contentModalTitle = photographData.name;
-    modalLightbox.modalListData = lightboxData;
+    // stockage des données pour la lightbox et transmission à l'objet modal
+    modalLightbox.modalListData = createLightbox(worksData);
     modalLightbox.idInsertListData = '.lightbox_body';
+    
+    createPhotographPage(photographData, worksData);
 }
 
 // récupération des données
-async function init() {
+async function init(sort = undefined) {
     const [{photographers},{media}] = await getPhotographers();
-    photographMain(photographers, media);
+    if(sort) {
+        updatePhotographPage(media, sort);
+    } else {
+        photographMain(photographers, media);
+    }
 }
 
 init(); 
