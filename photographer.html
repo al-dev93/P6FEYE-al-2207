@@ -10,29 +10,30 @@
   <body>
     <header>
       <a href="/">
-        <img src="assets/images/logo.png" class="logo" role="img" alt="Fisheye Home page"/>
+        <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page"/>
       </a>
     </header>
     <main id="main" aria-hidden="false">
       <div class="photograph_header">
         <article>
           <h1 id="name">
+            nom
             <!-- NOTE: insertion du nom du photographe -->
           </h1>
           <!-- NOTE: insertion des informations sur le photographe -->
         </article>
         <button class="contact_button" onclick="modalContact.openModal()" aria-label="Contactez-moi">Contactez-moi</button>
         <!-- NOTE: insertion de la photo du photographe -->
-        <img src="" alt="">
+        <img src="assets/" alt="">
       </div>
       <nav class="sort_menu">
         <label for="sort_select">Trier par</label>
         <div class="wrapper_select">
-          <span class="dropdown"><img src="assets/icons/dropdown_close.svg" alt=""></span>
-          <select name="sort_select" id="sort_select" multiple>
-            <option value="like" onclick="init('popularity')" selected>Popularité</option>
-            <option value="date" onclick="init('date')">Date</option>
-            <option value="title" onclick="init('title')">Titre</option>
+          <span class="dropdown" role="button" tabindex="0" aria-label="Ouvre le menu déroulant de tri"><img src="assets/icons/dropdown_close.svg" alt=""></span>
+          <select name="sort_select" id="sort_select" multiple tabindex="0" aria-expanded="false">
+            <option value="popularity" tabindex="-1">Popularité</option>
+            <option value="date" tabindex="-1">Date</option>
+            <option value="title" tabindex="-1">Titre</option>
           </select>
         </div>
       </nav>
@@ -47,7 +48,7 @@
           <span class="cost_day"></span>
       </aside>
     </main>
-    <div id="modal" aria-hidden="true" role="dialog" aria-labelledby="modal_title" aria-modal="false">
+    <div id="modal" aria-hidden="true" role="dialog" aria-modal="false">
       <!-- NOTE: insertion du contenu de la modale  -->
 		</div>
     <!-- NOTE: template pour le formulaire de contact qui sera inséré dans la modale -->
@@ -78,7 +79,7 @@
     <!-- NOTE: template pour la lightbox qui sera inséré dans la modale -->
     <template id="lightbox_template">
       <div id="lightbox_modal" role="presentation">
-        <span id="modal_title" class="sr-only">Visualiseur défilable d'images et vidéo</span>
+        <span id="lightbox_title" class="sr-only">Visualiseur défilable d'images et vidéo</span>
         <div class="wrapper_ctrl_right">
           <img class="modal_close" src="assets/icons/close_red.svg" onclick="modalLightbox.closeModal()" 
               role="button" alt="Ferme la lightbox" tabindex="0"/>

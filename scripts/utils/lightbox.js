@@ -17,7 +17,7 @@ function displayMedia(currentIndex, slide = false, lastIndex = undefined) {
             .item(lastIndex)
             .classList
             .toggle('is-hidden');
-            inLightbox.item(lastIndex).setAttribute('aria-hidden', 'true');
+        inLightbox.item(lastIndex).setAttribute('aria-hidden', 'true');
     }
 }
 

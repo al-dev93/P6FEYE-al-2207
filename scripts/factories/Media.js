@@ -19,7 +19,6 @@ function mediaFactory(data, index) {
         //intègre la carte média
         card.appendChild(mediaPicture);
         card.appendChild(informations);
-        //! arraySortMedia.push({item: index, title: title, date: date, likes: likes});
         
         return card;
     }
@@ -47,6 +46,8 @@ function mediaFactory(data, index) {
         mediaLikes.setAttribute('class', 'likes');
         mediaLikes.setAttribute('data-isliked', 'false');
         mediaLikes.setAttribute('tabindex', '0');
+        mediaLikes.setAttribute('aria-label', 'Clickez pour liker');
+        mediaLikes.setAttribute('role', 'button');
         heartIcon.setAttribute('src', `assets/icons/heart_red.svg`);
         heartIcon.setAttribute('alt', "Likes");
         countLikes.textContent = `${likes}`;
@@ -74,7 +75,6 @@ function mediaFactory(data, index) {
         cardImage.setAttribute('alt', "");
         cardImage.setAttribute('tabindex', "-1");
         cardImage.setAttribute('class', 'media_content')
-        //! cardImage.setAttribute('data-id', id)
         linkedLightBox.appendChild(cardImage);
         return(linkedLightBox);
     }

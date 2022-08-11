@@ -18,7 +18,6 @@ function createLightbox(works) {
 
         item.classList.add('lightbox_item', 'is-hidden');
         item.setAttribute('data-item', `${element}`);
-        //! item.setAttribute('data-id', `${works[element].id}`)
         item.setAttribute('aria-hidden', 'true');
         item.setAttribute('aria-label', `${Number(element)+1}`+` sur ${works.length}`);
         media.setAttribute('class', 'lightbox_media');
@@ -97,49 +96,43 @@ function createPhotographPage(photograph, works) {
     displayCostAndLikesPanel(photograph.price);
 }
 
-function updatePhotographPage(media, sort) {
-    // stockage des média du photographe
-    const worksData = media.filter(value => value.photographerId == photographId);
-    document
-        .querySelector('.media_section')
-        .innerHTML = "";
-    
-    if(arrayLikesUpdate) {
-        updateWorkDataLikes(worksData);
-    }
-
-    sortMedia(worksData, sort);
-    console.log(worksData);
-
-    modalLightbox.modalListData = createLightbox(worksData);
-
-    displayGallery(worksData);
-}
-
-// créé les structures de données média et photographe
-function photographMain(photographers, media) {
+// créé les structures de données média, photographe, lightbox et initialise les objets modale
+function photographMain(photographers, media, sort) {
     // stockage des média du photographe
     const worksData = media.filter(value => value.photographerId == photographId);
     // stockage des données sur le photographe
     const photographData = photographers.find(value => value.id == photographId);
     
-    // création des objets modales contact et lightbox
-    modalContact.contentModalTitle = photographData.name;
-    // stockage des données pour la lightbox et transmission à l'objet modal
+    if(!sort) {
+        // nom du photographe à afficher dans le formulaire de contact
+        modalContact.contentModalTitle = photographData.name;
+        // cible l'élément pour afficher la lightbox
+        modalLightbox.idInsertListData = '.lightbox_body';
+        // pour création de la page du photographe
+        createPhotographPage(photographData, worksData);
+    } else {
+        // efface la gallerie du photographe
+        document
+            .querySelector('.media_section')
+            .innerHTML = "";
+        // mise à jour de worksData si modification de likes
+        if(arrayLikesUpdate) {
+            updateWorkDataLikes(worksData);
+        }
+        // tri de la gallerie
+        sortMedia(worksData, sort);
+        // pour affichage de la galerie triée
+        displayGallery(worksData);
+    }
+    // transmission du contenu de la lightbox à l'objet modalLightbox
     modalLightbox.modalListData = createLightbox(worksData);
-    modalLightbox.idInsertListData = '.lightbox_body';
-    
-    createPhotographPage(photographData, worksData);
 }
 
 // récupération des données
 async function init(sort = undefined) {
     const [{photographers},{media}] = await getPhotographers();
-    if(sort) {
-        updatePhotographPage(media, sort);
-    } else {
-        photographMain(photographers, media);
-    }
+    // fonction de création des structures de données
+    photographMain(photographers, media, sort);
 }
 
 init(); 
