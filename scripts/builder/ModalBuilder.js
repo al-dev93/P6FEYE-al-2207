@@ -9,6 +9,11 @@ class ModalBuilder {
         return this;
     }
 
+    setIdModalAriaLabeled(selector) {
+        this.idModalAriaLabeled = selector;
+        return this;
+    }
+
     setIdLastFocus(selector) {
         this.idLastFocus = selector;
         return this;
@@ -23,11 +28,6 @@ class ModalBuilder {
         this.idFocusIn = selector;
         return this;
     }
-
-    // setIdModalTitle(selector) {
-    //     this.idModalTitle = selector;
-    //     return this;
-    // }
 
     setCtrlKeyList(list) {
         this.ctrlKeyList = list;

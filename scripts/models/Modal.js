@@ -18,6 +18,10 @@ class Modal {
             clone
                 .getElementById('modal_title')
                 .insertAdjacentText('beforeend', this.contentModalTitle);
+            
+        }
+        if (this.idModalAriaLabeled) {
+            this.#modal.setAttribute('aria-labelledby', this.idModalAriaLabeled);
         }
         // collection de média pour la lightbox
         if(this.idInsertListData) {
@@ -28,18 +32,19 @@ class Modal {
         }
         this.#modal.appendChild(clone);
         this.#modalBody = document.getElementById(this.idModalBody);
-        return this.#modalListDataSize=((this.modalListData)? this.modalListData.length : 0)
+        this.#modalListDataSize = (this.modalListData)? this.modalListData.length : 0;
+        return this.#modalListDataSize;
     }
 
     // distribue la gestion des évènements
     #eventHandler() {
         this.#eventCtrlKeyModal();  // gestion des évènements claviers de la modale 
         switch (this.idTemplate) {
-            // gestion supplémentaire pour le submit du formulaire de contact
+            // gestion de l'évènement submit du formulaire de contact
             case 'contact_template' :
                 this.#eventSubmit()
                 break;
-            // gestion supplémentaire pour la souris et le clavier dans la lightbox
+            // gestion de la souris et du clavier dans la lightbox
             case 'lightbox_template' :
                 this.#eventKeySlide();
                 this.#eventClickSlide();
@@ -84,6 +89,7 @@ class Modal {
             switch (true) {
                 case event.key === 'ArrowRight' :
                     this.#ctrlNext.focus();
+                    // utilisation de la flèche droite place le focus sur le défilement avant et exécute les instructions suivantes
                 case event.key === 'Enter' && document.activeElement === this.#ctrlNext :
                     this.#slideMedia(this.#slideStep);
                     event.preventDefault();
@@ -91,6 +97,7 @@ class Modal {
                     
                 case event.key === 'ArrowLeft' :
                     this.#ctrlPrev.focus();
+                    // utilisation de la flèche gauche place le focus sur le défilement arrière et exécute les instructions suivantes
                 case event.key === 'Enter' && document.activeElement === this.#ctrlPrev :
                     this.#slideMedia(-this.#slideStep);
                     event.preventDefault();
@@ -122,14 +129,15 @@ class Modal {
         })
     }
 
-        // fixe la position courante dans la lightbox à l'ouverture
+        // fixe la position courante dans la lightbox à l'ouverture, l'index courant, le pas de défilement
+        // et affiche le média clické
         #initLightbox() {
             const listIndex = this.#modalBody.getElementsByClassName('lightbox_item');
-            const focusOut = (this.#focusOut.tagName !== 'IMG' && this.#focusOut.tagName !== 'VIDEO')?
-                                this.#focusOut.firstElementChild : this.#focusOut;
+            const focusOut = (this.#focusOut.tagName === 'BUTTON')?
+                            this.#focusOut : this.#focusOut.parentNode;
             // position courante est celle du media activé pour l'ouverture
             for (const element of listIndex) {
-                if(element.getAttribute('data-id') === focusOut.getAttribute('data-id')) {
+                if(element.getAttribute('data-item') === focusOut.getAttribute('data-item')) {
                     this.#currentIndex = Number(element.getAttribute('data-item'));
                     break;
                 }
@@ -153,7 +161,7 @@ class Modal {
         this.#function(this.#currentIndex, this.#isAnimated, this.#lastIndex);
     }
 
-    // défini les éléments focusables
+    // définit les éléments focusables
     #setFocusableTarget() {
         this.#focusIn = this.#modalBody.querySelector(this.idFocusIn);
         this.#closeButton = this.#modalBody.querySelector(this.idCloseButton);
@@ -182,6 +190,7 @@ class Modal {
     // efface la modale
     #deleteModal() {
         (this.#isAnimated)? this.#function(this.#currentIndex) : null;
+        this.#modal.removeAttribute('aria-labelledby');
         this.#modal.innerHTML = "";
     }
 
@@ -191,6 +200,7 @@ class Modal {
         this.eventModalFunction = (builder.eventModalFunction)? builder.eventModalFunction : false;
         this.idLastFocus = builder.idLastFocus;
         this.idModal = (builder.idModal)? builder.idModal : 'modal';
+        this.idModalAriaLabeled = (builder.idModalAriaLabeled)? builder.idModalAriaLabeled : false;
         this.idCloseButton = (builder.idCloseButton)? builder.idCloseButton : '.modal_close';
         this.idFocusIn = (builder.idFocusIn)? builder.idFocusIn : this.idCloseButton;
         this.ctrlKeyList = (builder.ctrlKeyList)? builder.ctrlKeyList : false;

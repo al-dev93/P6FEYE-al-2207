@@ -11,6 +11,7 @@ function submitContact(event) {
 
 // builder pour la modale contactez-moi
 const modalContact = new ModalBuilder('contact_modal', 'contact_template') // ciblage du conteneur et du template
+    .setIdModalAriaLabeled('modal_title') // cible l'id pour libellé aria de la modal
     .setIdLastFocus('button[class="contact_button"]') // ciblage du dernier élément de la modale recevant le focus
     .setModalFunction(submitContact) // transmission de l'objet de définition de la callback
     .buildModal(); // création de la modale de contact
