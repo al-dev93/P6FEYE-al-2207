@@ -9,6 +9,11 @@ class ModalBuilder {
         return this;
     }
 
+    setIdModalAriaLabeled(selector) {
+        this.idModalAriaLabeled = selector;
+        return this;
+    }
+
     setIdLastFocus(selector) {
         this.idLastFocus = selector;
         return this;

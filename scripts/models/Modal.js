@@ -18,9 +18,10 @@ class Modal {
             clone
                 .getElementById('modal_title')
                 .insertAdjacentText('beforeend', this.contentModalTitle);
-            this.#modal.setAttribute('aria-labelledby', 'modal_title');
-        } else {
-            this.#modal.setAttribute('aria-labelledby', 'lightbox_title');
+            
+        }
+        if (this.idModalAriaLabeled) {
+            this.#modal.setAttribute('aria-labelledby', this.idModalAriaLabeled);
         }
         // collection de média pour la lightbox
         if(this.idInsertListData) {
@@ -31,7 +32,8 @@ class Modal {
         }
         this.#modal.appendChild(clone);
         this.#modalBody = document.getElementById(this.idModalBody);
-        return this.#modalListDataSize=((this.modalListData)? this.modalListData.length : 0)
+        this.#modalListDataSize = (this.modalListData)? this.modalListData.length : 0;
+        return this.#modalListDataSize;
     }
 
     // distribue la gestion des évènements
@@ -87,6 +89,7 @@ class Modal {
             switch (true) {
                 case event.key === 'ArrowRight' :
                     this.#ctrlNext.focus();
+                    // utilisation de la flèche droite place le focus sur le défilement avant et exécute les instructions suivantes
                 case event.key === 'Enter' && document.activeElement === this.#ctrlNext :
                     this.#slideMedia(this.#slideStep);
                     event.preventDefault();
@@ -94,6 +97,7 @@ class Modal {
                     
                 case event.key === 'ArrowLeft' :
                     this.#ctrlPrev.focus();
+                    // utilisation de la flèche gauche place le focus sur le défilement arrière et exécute les instructions suivantes
                 case event.key === 'Enter' && document.activeElement === this.#ctrlPrev :
                     this.#slideMedia(-this.#slideStep);
                     event.preventDefault();
@@ -196,6 +200,7 @@ class Modal {
         this.eventModalFunction = (builder.eventModalFunction)? builder.eventModalFunction : false;
         this.idLastFocus = builder.idLastFocus;
         this.idModal = (builder.idModal)? builder.idModal : 'modal';
+        this.idModalAriaLabeled = (builder.idModalAriaLabeled)? builder.idModalAriaLabeled : false;
         this.idCloseButton = (builder.idCloseButton)? builder.idCloseButton : '.modal_close';
         this.idFocusIn = (builder.idFocusIn)? builder.idFocusIn : this.idCloseButton;
         this.ctrlKeyList = (builder.ctrlKeyList)? builder.ctrlKeyList : false;

@@ -9,9 +9,12 @@ const photographId = new URL(document.location)
 // créé le contenu de la lightbox
 function createLightbox(works) {
     const lightbox = [];
+    /*  global element 
+        element: writable */
     for(element in works) {
         // eléments de la lightbox
         const item = document.createElement('li');
+        const hideLabel = document.createElement('span');
         const media = document.createElement('div');
         const title = document.createElement('p');
         let contentMedia;
@@ -19,10 +22,9 @@ function createLightbox(works) {
         item.classList.add('lightbox_item', 'is-hidden');
         item.setAttribute('data-item', `${element}`);
         item.setAttribute('aria-hidden', 'true');
-        item.setAttribute('aria-label', `${Number(element)+1}`+` sur ${works.length}`);
+        hideLabel.setAttribute('class', "sr-only");
         media.setAttribute('class', 'lightbox_media');
         title.setAttribute('class', 'media_title');
-
         if(works[element].image) {
             contentMedia = document.createElement('img');
             contentMedia.setAttribute('src', `assets/media/image/${works[element].image}`);
@@ -32,9 +34,11 @@ function createLightbox(works) {
             contentMedia.setAttribute('src', `assets/media/video/${works[element].video}`);
             contentMedia.setAttribute('controls', "")
         }
+        hideLabel.textContent = `vue ${Number(element)+1} sur ${works.length}`;
 
         media.appendChild(contentMedia);
         title.textContent = works[element].title;
+        item.appendChild(hideLabel);
         item.appendChild(media);
         item.appendChild(title);
         lightbox.push(item);
@@ -49,6 +53,7 @@ function displayHeader(photograph) {
     const name = identity.getElementsByTagName('h1').item(0);
     const photo = header.getElementsByTagName('img').item(0);
     // initialise la photographerFactory
+    /* global photographerFactory */
     const photographFactory = photographerFactory(photograph, pageName);
     // getUserCardDom de la factory adaptée pour la page photographe
     const photographInfo = photographFactory.getUserCardDOM();
@@ -63,6 +68,7 @@ function displayGallery(works) {
     const worksGallery = document.querySelector('.media_section');
     let index = 0;
     works.forEach((media) => {
+        /* global mediaFactory */
         const worksFactory = mediaFactory(media, index);
         const mediaCardDOM = worksFactory.getCardMediaDOM();
         worksGallery.appendChild(mediaCardDOM);
@@ -81,7 +87,7 @@ function displayCostAndLikesPanel(photographCost) {
 // affiche et met à jour la somme des likes dans le panneau
 function displayLikesSum() {
     const likesSum = document.getElementById("likes_sum");
-
+    /* global getSum */
     likesSum.textContent = getSum();
 
     likesSum.addEventListener('liked', () => {
@@ -105,8 +111,10 @@ function photographMain(photographers, media, sort) {
     
     if(!sort) {
         // nom du photographe à afficher dans le formulaire de contact
+        /* global modalContact */
         modalContact.contentModalTitle = photographData.name;
         // cible l'élément pour afficher la lightbox
+        /* global modalLightbox */
         modalLightbox.idInsertListData = '.lightbox_body';
         // pour création de la page du photographe
         createPhotographPage(photographData, worksData);
@@ -116,6 +124,9 @@ function photographMain(photographers, media, sort) {
             .querySelector('.media_section')
             .innerHTML = "";
         // mise à jour de worksData si modification de likes
+        /*  global arrayLikesUpdate 
+            sortMedia 
+            updateWorkDataLikes*/
         if(arrayLikesUpdate) {
             updateWorkDataLikes(worksData);
         }
@@ -130,6 +141,7 @@ function photographMain(photographers, media, sort) {
 
 // récupération des données
 async function init(sort = undefined) {
+    /* global getPhotographers */
     const [{photographers},{media}] = await getPhotographers();
     // fonction de création des structures de données
     photographMain(photographers, media, sort);

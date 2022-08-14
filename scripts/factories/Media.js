@@ -1,5 +1,6 @@
+// eslint-disable-next-line no-unused-vars
 function mediaFactory(data, index) {
-    const {id, title, likes, date} = data;
+    const {id, title, likes} = data;
     
     //* méthode de création de la carte média
     function getCardMediaDOM() {
@@ -8,8 +9,10 @@ function mediaFactory(data, index) {
         const informations = getMediaInfo();
         let mediaPicture;
         // détermination de la balise html en fonction du contenu
+        // eslint-disable-next-line no-prototype-builtins
         if(data.hasOwnProperty('image')) {
             mediaPicture = getMediaLinkedPicture(data.image, 'image', 'img');
+        // eslint-disable-next-line no-prototype-builtins
         } else if(data.hasOwnProperty('video')) {
             mediaPicture = getMediaLinkedPicture(data.video, 'video', 'video')
         } else {
@@ -40,20 +43,44 @@ function mediaFactory(data, index) {
 
     //* nombre de likes et îcone coeur
     function getMediaLikes() {
-        const mediaLikes = document.createElement('div')
+        const mediaLikes = document.createElement('div');
+        const hiddenLabel = document.createElement('span');
         const countLikes = document.createElement('span');
         const heartIcon = document.createElement('img');
+        let isLiked = false;
         mediaLikes.setAttribute('class', 'likes');
-        mediaLikes.setAttribute('data-isliked', 'false');
+        
         mediaLikes.setAttribute('tabindex', '0');
-        mediaLikes.setAttribute('aria-label', 'Clickez pour liker');
-        mediaLikes.setAttribute('role', 'button');
-        heartIcon.setAttribute('src', `assets/icons/heart_red.svg`);
+        mediaLikes.setAttribute('aria-live', 'polite');
+        mediaLikes.setAttribute('aria-relevant', 'all');
+        mediaLikes.setAttribute('aria-atomic', 'true');
+        /* global arrayLikesUpdate */
+        if(arrayLikesUpdate.length) {
+            isLiked = arrayLikesUpdate.find(element => {
+                return element.id == id
+            });
+        }
+        if(isLiked) {
+            mediaLikes.setAttribute('data-isliked', 'true');
+            heartIcon.setAttribute('src', 'assets/icons/heart_black.svg');
+            hiddenLabel.textContent = 'Liké';
+        } else {
+            mediaLikes.setAttribute('data-isliked', 'false');
+            heartIcon.setAttribute('src', 'assets/icons/heart_red.svg');
+            hiddenLabel.textContent = 'Cliquez pour liker';
+        }
+        hiddenLabel.setAttribute('class', 'sr-only');
         heartIcon.setAttribute('alt', "Likes");
+        countLikes.setAttribute('role', 'text');
+        
         countLikes.textContent = `${likes}`;
+        mediaLikes.appendChild(hiddenLabel);
         mediaLikes.appendChild(countLikes);
         mediaLikes.appendChild(heartIcon);
-        setOnLikeEvent(mediaLikes, id);
+        if(!isLiked) {
+            /* global setOnLikeEvent */
+            setOnLikeEvent(mediaLikes, id);
+        }
         return mediaLikes;
     }
 

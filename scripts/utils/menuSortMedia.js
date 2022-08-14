@@ -17,7 +17,6 @@ function selectedSortMenuItem(item) {
         default:
             break;
     }
-    console.log(item.parentElement.parentElement)
     sortMenuMedia.classList.remove('dropdown_open');
     selectMenuMedia.setAttribute('aria-expanded', 'false');
     selectMenuMedia.focus();
@@ -44,6 +43,19 @@ dropDown.addEventListener('click',() =>{
     } else {
         selectMenuMedia.focus();
         selectMenuMedia.setAttribute('aria-expanded', 'false');
+    }
+});
+
+dropDown.addEventListener('keydown',(event) =>{
+    if (event.key === 'Enter') {
+        sortMenuMedia.classList.toggle('dropdown_open');
+        if(sortMenuMedia.classList.contains('dropdown_open')) {
+            selectMenuMedia.firstElementChild.focus();
+            selectMenuMedia.setAttribute('aria-expanded', 'true');
+        } else {
+            selectMenuMedia.focus();
+            selectMenuMedia.setAttribute('aria-expanded', 'false');
+        }
     }
 });
 

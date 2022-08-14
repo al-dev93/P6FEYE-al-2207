@@ -3,6 +3,8 @@
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
     <title>Fisheye - photographe</title>
@@ -31,15 +33,15 @@
         <div class="wrapper_select">
           <span class="dropdown" role="button" tabindex="0" aria-label="Ouvre le menu déroulant de tri"><img src="assets/icons/dropdown_close.svg" alt=""></span>
           <select name="sort_select" id="sort_select" multiple tabindex="0" aria-expanded="false">
-            <option value="popularity" tabindex="-1">Popularité</option>
-            <option value="date" tabindex="-1">Date</option>
-            <option value="title" tabindex="-1">Titre</option>
+            <option value="popularity" tabindex="-1" role="menuitem">Popularité</option>
+            <option value="date" tabindex="-1" role="menuitem">Date</option>
+            <option value="title" tabindex="-1" role="menuitem">Titre</option>
           </select>
         </div>
       </nav>
       <div class="media_section"></div>
       <aside>
-          <div class="likes_number">
+          <div class="likes_number" aria-live="polite" aria-relevant="additions" aria-atomic="true">
             <span id="likes_sum">
               <!-- NOTE: insertion de la somme des likes -->
             </span>
@@ -53,7 +55,7 @@
 		</div>
     <!-- NOTE: template pour le formulaire de contact qui sera inséré dans la modale -->
     <template id="contact_template">
-      <div id="contact_modal" role="document">
+      <div id="contact_modal" role="form">
 				<header>
           <h2 id="modal_title">Contactez-moi<br>
           <!--NOTE: mise à jour du titre  -->
@@ -78,20 +80,19 @@
     </template>
     <!-- NOTE: template pour la lightbox qui sera inséré dans la modale -->
     <template id="lightbox_template">
-      <div id="lightbox_modal" role="presentation">
+      <div id="lightbox_modal" aria-atomic="true" aria-live="polite" aria-relevant="all">
         <span id="lightbox_title" class="sr-only">Visualiseur défilable d'images et vidéo</span>
         <div class="wrapper_ctrl_right">
           <img class="modal_close" src="assets/icons/close_red.svg" onclick="modalLightbox.closeModal()" 
               role="button" alt="Ferme la lightbox" tabindex="0"/>
           <img class="ctrl_right" src="assets/icons/next.svg" role="button" alt="Image suivante" tabindex="0">
         </div>
-        <ul class="lightbox_body" aria-label="Contenu de la lightbox" role="group">
+        <ul class="lightbox_body" aria-label="Contenu de la lightbox">
             <!--NOTE: insertion des média  -->
         </ul>
         <img class="ctrl_left" src="assets/icons/prev.svg" role="button" alt="Image précédente" tabindex="0">
       </div>
     </template>
-
     
     <!-- Api -->
     <script src="scripts/api/api.js"></script>
