@@ -31,7 +31,7 @@ h1 {
     height: 50px;
     margin-left: 100px;
 }
-
+/* texte caché pour l'ccessibilité */
 .sr-only {
     border: 0 !important;
     clip: rect(1px, 1px, 1px, 1px) !important;
@@ -44,23 +44,6 @@ h1 {
     position: absolute !important;
     width: 1px !important;
     white-space: nowrap !important;
-}
-
-.sr-only-focusable:focus,
-.sr-only-focusable:active {
-    clip: auto !important;
-    -webkit-clip-path: none !important;
-    clip-path: none !important;
-    height: auto !important;
-    margin: auto !important;
-    overflow: visible !important;
-    width: auto !important;
-    white-space: normal !important;
-    outline: solid 2px var(--colorRed);
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
 }
 
 .is-hidden {

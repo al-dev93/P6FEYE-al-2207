@@ -1,3 +1,5 @@
+// pattern contructor des objets modal
+// eslint-disable-next-line no-unused-vars
 class ModalBuilder {
     constructor(idModalBody, idTemplate){
         this.idModalBody = idModalBody;
@@ -38,7 +40,7 @@ class ModalBuilder {
         this.eventModalFunction = object;
         return this;
     }
-
+    /* global Modal */
     buildModal() {
         return new Modal(this);
     }

@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 function photographerFactory(data, page) {
     const {id, name, portrait, city, country, tagline, price} = data;
     const picture = `assets/photographers/${portrait}`;
@@ -58,11 +59,12 @@ function photographerFactory(data, page) {
 
     //* image choisie par le photographe pour la page d'accueil
     function getPhotographImage() {
+        /* global choicePhotoForHome */
         const choiceImage = choicePhotoForHome
             .find(value => value.id == id)
             .picture;
         const photographImage = document.createElement('img');
-        photographImage.setAttribute('src', `/assets/media/image/${choiceImage}`);
+        photographImage.setAttribute('src', `assets/media/image/${choiceImage}`);
         photographImage.setAttribute('role', 'img');
         photographImage.setAttribute('alt', "");
         return photographImage;

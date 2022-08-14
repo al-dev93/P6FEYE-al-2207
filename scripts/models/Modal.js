@@ -1,3 +1,6 @@
+//* classe utilisée pour la création des objets modal *********/
+//* formulaire de contact et lightbox *************************/
+// eslint-disable-next-line no-unused-vars
 class Modal {
 //* propriétés privées ***************/
     #modal; #template; #modalBody;
@@ -86,10 +89,12 @@ class Modal {
     // évènements clavier de la lightbox
     #eventKeySlide() {
         this.#modalBody.addEventListener('keydown', event => {
+            /*eslint no-fallthrough: ["error", { "commentPattern": "break[\\s\\w]*omitted" }]*/
             switch (true) {
                 case event.key === 'ArrowRight' :
                     this.#ctrlNext.focus();
-                    // utilisation de la flèche droite place le focus sur le défilement avant et exécute les instructions suivantes
+                    // flèche droite place le focus sur le défilement avant et exécute les instructions suivantes
+                    // break omitted
                 case event.key === 'Enter' && document.activeElement === this.#ctrlNext :
                     this.#slideMedia(this.#slideStep);
                     event.preventDefault();
@@ -97,7 +102,8 @@ class Modal {
                     
                 case event.key === 'ArrowLeft' :
                     this.#ctrlPrev.focus();
-                    // utilisation de la flèche gauche place le focus sur le défilement arrière et exécute les instructions suivantes
+                    // flèche gauche place le focus sur le défilement arrière et exécute les instructions suivantes
+                    // break omitted
                 case event.key === 'Enter' && document.activeElement === this.#ctrlPrev :
                     this.#slideMedia(-this.#slideStep);
                     event.preventDefault();

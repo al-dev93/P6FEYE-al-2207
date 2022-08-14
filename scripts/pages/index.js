@@ -8,6 +8,7 @@ async function displayData(photographers) {
     const photographersSection = document.querySelector(".photographer_section");
     // construit les cartes photographes
     photographers.forEach((photographer) => {
+        // eslint-disable-next-line no-undef
         const photographerModel = photographerFactory(photographer, pageName);
         const userCardDOM = photographerModel.getUserCardDOM();
         photographersSection.appendChild(userCardDOM);
@@ -17,6 +18,7 @@ async function displayData(photographers) {
 // initialisation
 async function init() {
     // Récupère les datas des photographes
+    // eslint-disable-next-line no-undef
     const [{ photographers }] = await getPhotographers();
     // affiche les cartes des photographes dans la page
     displayData(photographers);

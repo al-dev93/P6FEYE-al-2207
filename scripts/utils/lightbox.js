@@ -1,5 +1,4 @@
-
-
+// affichage du média courant dans la lightbox
 function displayMedia(currentIndex, slide = false, lastIndex = undefined) {
     const inLightbox = document.getElementsByClassName('lightbox_item');
     inLightbox

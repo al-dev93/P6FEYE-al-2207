@@ -12,6 +12,7 @@ function selectedSortMenuItem(item) {
         case key === 'popularity':
         case key === 'date':
         case key === 'title':
+            /* global init */
             init(key);
             break;
         default:

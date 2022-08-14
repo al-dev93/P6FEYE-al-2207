@@ -1,3 +1,5 @@
+// tableau contenant la photo retenu pour la page d'accueil
+// eslint-disable-next-line no-unused-vars
 const choicePhotoForHome = [
     {
         name : "Mimi Keel",

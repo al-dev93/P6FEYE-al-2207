@@ -27,6 +27,8 @@
     /* border-radius ************************/
     --borderRadius_5px: 5px;
     --borderRadiusCircle: 50%;
+    /* échzlle hauteur d'écran **************/
+    --scaleHeightScreen: 0.8457;
 }
 /********************************************/
 
@@ -307,24 +309,24 @@ aside .cost_day {
     border-radius: var(--borderRadius_5px);
     background-color: var(--colorBackgroundBox);
     width: 669px;
-    padding: 13px 35px 32px;
-    margin-top: 58px;
+    padding: 15px 35px 32px;
+    margin-top: 62px;
 }
 
 #contact_modal header {
     justify-content: space-between;
     align-items: flex-start;
     width: 100%;
-    margin-bottom: 16px;
+    margin-bottom: 19px;
     height: auto;
 }
 
 #contact_modal header #modal_title {
-    height: 132px;
+    height: 156px;
     margin: 0;
-    font-size: var(--fontsizeTitleModal);
+    font-size: var(--fontsizePhotographer_hight);
     font-weight: normal;
-    line-height: 70px;
+    line-height: 83px;
 }
 
 /** formulaire de contact  */
@@ -342,8 +344,8 @@ form input, form textarea {
 }
 
 form label, form input, form textarea {
-    font-size: var(--fontSizeInputModal);
-    line-height: 40px;
+    font-size: var(--fontSizePhotographer_small);
+    line-height: 47px;
 }
 
 form label {
@@ -354,27 +356,27 @@ form div {
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-bottom: 22px;
+    margin-bottom: 26px;
 }
 
 form input {
-    height: 58px;
+    height: 68px;
 }
 
 #contact_email{
-    margin-bottom: 9px;
+    margin-bottom: 10px;
 }
 
 form textarea {
-    height: 144px;
-    margin-top: 4px;
+    height: 170px;
+    margin-top: 5px;
 }
 
 #contact_modal .contact_button {
-    font-size: var(--fontSizeButtonModal);
-    line-height: 19.5px;
+    font-size: var(--fontSizeSlogan_hight);
+    line-height: 23px;
     width: 170px;
-    height: 58px;
+    height: 69px;
 }
 
 
@@ -446,4 +448,76 @@ form textarea {
     width: 42px;
     margin-top: 15px;
 }
+/** media query d'adaptation de la taille de la modale à la hauteur de l'écran */
+@media screen and (min-height: 866px) {
+    /* adaptation du formulaire de contact */
+    #contact_modal {
+        width: calc(var(--scaleHeightScreen) * 669px);
+        padding: calc(var(--scaleHeightScreen) * 15px) calc(var(--scaleHeightScreen) * 35px) calc(var(--scaleHeightScreen) * 32px);
+        margin-top: calc(var(--scaleHeightScreen) * 62px);
+    }
+    
+    #contact_modal header {
+        margin-bottom: calc(var(--scaleHeightScreen) * 19px);
+    }
+    
+    #contact_modal header #modal_title {
+        height: calc(var(--scaleHeightScreen) * 156px);
+        font-size: calc(var(--scaleHeightScreen) * var(--fontsizePhotographer_hight));
+        line-height: calc(var(--scaleHeightScreen) * 83px);
+    }
+    
+    form label, form input, form textarea {
+        font-size: calc(var(--scaleHeightScreen) * var(--fontSizePhotographer_small));
+        line-height: calc(var(--scaleHeightScreen) * 47px);
+    }
+    
+    form div {
+        margin-bottom: calc(var(--scaleHeightScreen) * 26px);
+    }
+    
+    form input {
+        height: calc(var(--scaleHeightScreen) * 68px);
+    }
+    
+    #contact_email{
+        margin-bottom: calc(var(--scaleHeightScreen) * 10px);
+    }
+    
+    form textarea {
+        height: calc(var(--scaleHeightScreen) * 170px);
+        margin-top: calc(var(--scaleHeightScreen) * 5px);
+    }
+    
+    #contact_modal .contact_button {
+        font-size: calc(var(--scaleHeightScreen) * var(--fontSizeSlogan_hight));
+        line-height: calc(var(--scaleHeightScreen) * 23px);
+        width: calc(var(--scaleHeightScreen) * 170px);
+        height: calc(var(--scaleHeightScreen) * 69px);
+    }
 
+    /* adaptation de la lightbox */
+    #lightbox_modal {
+        padding: calc(var(--scaleHeightScreen) * 62px) calc(var(--scaleHeightScreen) * 195px) calc(var(--scaleHeightScreen) * 19px) ;
+    }
+    
+    #lightbox_modal .lightbox_media {
+        width: calc(var(--scaleHeightScreen) * 1050px);
+        height: calc(var(--scaleHeightScreen) * 900px);
+        margin-bottom: calc(var(--scaleHeightScreen) * 12px);
+    }
+    
+    #lightbox_modal .lightbox_body .media_title {
+        font-size: calc(var(--scaleHeightScreen) * var(--fontSizeAddress_hight));
+        line-height: calc(var(--scaleHeightScreen) * 31px);
+    }
+    
+    #lightbox_modal .ctrl_right {
+        margin-top: calc(var(--scaleHeightScreen) * 369px);
+    }
+    
+    #lightbox_modal .modal_close {
+        width: calc(var(--scaleHeightScreen) * 42px);
+        margin-top: calc(var(--scaleHeightScreen) * 15px);
+    }
+}

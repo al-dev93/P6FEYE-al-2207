@@ -1,5 +1,6 @@
 
 
+// eslint-disable-next-line no-unused-vars
 function sortMedia(worksData, sort) {
     switch (sort) {
         case 'popularity':
