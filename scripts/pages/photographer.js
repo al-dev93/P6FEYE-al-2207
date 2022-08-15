@@ -9,9 +9,7 @@ const photographId = new URL(document.location)
 // créé le contenu de la lightbox
 function createLightbox(works) {
     const lightbox = [];
-    /*  global element 
-        element: writable */
-    for(element in works) {
+    for(let element in works) {
         // eléments de la lightbox
         const item = document.createElement('li');
         const hideLabel = document.createElement('span');
