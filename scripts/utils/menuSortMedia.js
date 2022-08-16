@@ -21,6 +21,7 @@ function selectedSortMenuItem(item) {
     sortMenuMedia.classList.remove('dropdown_open');
     selectMenuMedia.setAttribute('aria-expanded', 'false');
     selectMenuMedia.focus();
+    selectMenuMedia.value = key;
 }
 
 selectMenuMedia.addEventListener('keydown', event => {
@@ -61,7 +62,9 @@ dropDown.addEventListener('keydown',(event) =>{
 });
 
 sortMenuItem.forEach(item => {
-    item.addEventListener('click', () => {
+    item.addEventListener('click', event => {
+        event.preventDefault();
+        event.stopPropagation();
         selectedSortMenuItem(item);
     });
 

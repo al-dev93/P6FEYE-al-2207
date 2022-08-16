@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
   <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/prefixed/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -11,7 +11,7 @@
   </head>
   <body>
     <header>
-      <a href="/">
+      <a href="index.html">
         <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page"/>
       </a>
     </header>
@@ -32,7 +32,7 @@
         <label for="sort_select">Trier par</label>
         <div class="wrapper_select">
           <span class="dropdown" role="button" tabindex="0" aria-label="Ouvre le menu déroulant de tri"><img src="assets/icons/dropdown_close.svg" alt=""></span>
-          <select name="sort_select" id="sort_select" multiple tabindex="0" aria-expanded="false">
+          <select name="sort_select" id="sort_select" multiple tabindex="0" aria-haspopup='true' aria-expanded="false">
             <option value="popularity" tabindex="-1" role="menuitem">Popularité</option>
             <option value="date" tabindex="-1" role="menuitem">Date</option>
             <option value="title" tabindex="-1" role="menuitem">Titre</option>

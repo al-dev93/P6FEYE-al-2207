@@ -166,6 +166,7 @@
 .wrapper_select.dropdown_open select {
     height: 170px;
     padding-top: 9px;
+    z-index: 100;
 }
 
 .wrapper_select select option {
@@ -422,7 +423,7 @@ form textarea {
 }
 
 #lightbox_modal .lightbox_media img, #lightbox_modal .lightbox_media video  {
-    max-width: 100%;
+    width: 100%;
     object-fit: cover;
 }
 
