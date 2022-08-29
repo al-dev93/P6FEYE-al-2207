@@ -5,7 +5,16 @@ const selectMenuMedia = document.getElementById('sort_select');
 const sortMenuItem = document.querySelectorAll('option');
 const countItem = sortMenuItem.length;
 
+// initialise initialise le menu de tri après le lancement d'un tri
+function initSortMenu(value) {
+    sortMenuMedia.classList.remove('dropdown_open');
+    selectMenuMedia.setAttribute('aria-expanded', 'false');
+    selectMenuMedia.focus();
+    selectMenuMedia.value = value;
+}
 
+/*  envoi l'option sélectionnée dans le menu de tri à la fonction init pour
+    pour afficher la page du photographe triée                              */
 function selectedSortMenuItem(item) {
     const key = item.getAttribute('value');
     switch (true) {
@@ -18,11 +27,23 @@ function selectedSortMenuItem(item) {
         default:
             break;
     }
-    sortMenuMedia.classList.remove('dropdown_open');
-    selectMenuMedia.setAttribute('aria-expanded', 'false');
-    selectMenuMedia.focus();
+    initSortMenu(key);
 }
 
+/*  controle l'ouverture et la fermeture du menu avec la flèche
+    dropdown                                                    */
+function dropDownControl() {
+    sortMenuMedia.classList.toggle('dropdown_open');
+    if(sortMenuMedia.classList.contains('dropdown_open')) {
+        selectMenuMedia.firstElementChild.focus();
+        selectMenuMedia.setAttribute('aria-expanded', 'true');
+    } else {
+        selectMenuMedia.focus();
+        selectMenuMedia.setAttribute('aria-expanded', 'false');
+    }
+}
+
+// gère les évènements clavier sur le menu de tri
 selectMenuMedia.addEventListener('keydown', event => {
     if(!sortMenuMedia.classList.contains('dropdown_open') && event.key === 'Enter') {
         sortMenuMedia.classList.add('dropdown_open');
@@ -36,30 +57,23 @@ selectMenuMedia.addEventListener('keydown', event => {
     }
 });
 
+/*  écoute le click de la souris sur la flèche dropdown
+    du menu de tri                                      */
 dropDown.addEventListener('click',() =>{
-    sortMenuMedia.classList.toggle('dropdown_open');
-    if(sortMenuMedia.classList.contains('dropdown_open')) {
-        selectMenuMedia.firstElementChild.focus();
-        selectMenuMedia.setAttribute('aria-expanded', 'true');
-    } else {
-        selectMenuMedia.focus();
-        selectMenuMedia.setAttribute('aria-expanded', 'false');
-    }
+    dropDownControl();
 });
 
+/*  écoute les évènements clavier sur la flèche dropdown
+    du menu de tri                                      */
 dropDown.addEventListener('keydown',(event) =>{
     if (event.key === 'Enter') {
-        sortMenuMedia.classList.toggle('dropdown_open');
-        if(sortMenuMedia.classList.contains('dropdown_open')) {
-            selectMenuMedia.firstElementChild.focus();
-            selectMenuMedia.setAttribute('aria-expanded', 'true');
-        } else {
-            selectMenuMedia.focus();
-            selectMenuMedia.setAttribute('aria-expanded', 'false');
-        }
+        dropDownControl();
     }
 });
 
+/*  écoute les évènements souris et clavier sur les items du menu de tri
+    et gère la navigation au clavier dans le menu de tri
+*/
 sortMenuItem.forEach(item => {
     item.addEventListener('click', () => {
         selectedSortMenuItem(item);

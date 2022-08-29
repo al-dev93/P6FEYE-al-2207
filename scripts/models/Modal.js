@@ -49,8 +49,8 @@ class Modal {
                 break;
             // gestion de la souris et du clavier dans la lightbox
             case 'lightbox_template' :
-                this.#eventKeySlide();
-                this.#eventClickSlide();
+                this.#eventSlide('keydown');
+                this.#eventSlide('click');
                 break;
 
             default:
@@ -86,57 +86,41 @@ class Modal {
         });
     }
 
-    // évènements clavier de la lightbox
-    #eventKeySlide() {
-        this.#modalBody.addEventListener('keydown', event => {
-            /*eslint no-fallthrough: ["error", { "commentPattern": "break[\\s\\w]*omitted" }]*/
-            switch (true) {
-                case event.key === 'ArrowRight' :
-                    this.#ctrlNext.focus();
-                    // flèche droite place le focus sur le défilement avant et exécute les instructions suivantes
-                    // break omitted
-                case event.key === 'Enter' && document.activeElement === this.#ctrlNext :
-                    this.#slideMedia(this.#slideStep);
-                    event.preventDefault();
-                    break;
-                    
-                case event.key === 'ArrowLeft' :
-                    this.#ctrlPrev.focus();
-                    // flèche gauche place le focus sur le défilement arrière et exécute les instructions suivantes
-                    // break omitted
-                case event.key === 'Enter' && document.activeElement === this.#ctrlPrev :
-                    this.#slideMedia(-this.#slideStep);
-                    event.preventDefault();
+    // évènements souris et clavier pour le défilement dans la lightbox
+    #eventSlide(eventType) {
+        this.#modalBody.addEventListener(eventType, event => {
+            let nextSlide, prevSlide;
+            switch (eventType) {
+                case 'click':
+                    nextSlide = event.target === this.#ctrlNext; // click sur la flèche droite
+                    prevSlide = event.target === this.#ctrlPrev; // click sur la flèche gauche
                     break;
             
+                case 'keydown':
+                    // Enter sur la flèche droite ou flèche droite du clavier
+                    nextSlide = (event.key === 'Enter' && event.target === this.#ctrlNext) || event.key === 'ArrowRight';
+                    // Enter sur la flèche gauche ou flèche gauche du clavier
+                    prevSlide = (event.key === 'Enter' && event.target === this.#ctrlPrev) || event.key === 'ArrowLeft';
+                    break;
+                
                 default:
                     return;
+            }
+            if (nextSlide) {
+                this.#slideMedia(this.#slideStep);
+                this.#ctrlNext.focus();
+                event.preventDefault();
+            }
+            else if (prevSlide) {
+                this.#slideMedia(-this.#slideStep);
+                this.#ctrlPrev.focus();
+                event.preventDefault();
             }
         });
     }
 
-    // évènements souris de la lightbox
-    #eventClickSlide() {
-        this.#modalBody.addEventListener('click', event => {
-            switch (true) {
-                case event.target === this.#ctrlNext :
-                    this.#slideMedia(this.#slideStep);
-                    event.preventDefault();
-                    break;
-
-                case event.target === this.#ctrlPrev :
-                    this.#slideMedia(-this.#slideStep);
-                    event.preventDefault();
-                    break;
-            
-                default:
-                    break;
-            }
-        })
-    }
-
-        // fixe la position courante dans la lightbox à l'ouverture, l'index courant, le pas de défilement
-        // et affiche le média clické
+        /*  fixe la position courante dans la lightbox à l'ouverture, l'index courant, le pas de défilement
+            et affiche le média clické                                                                      */
         #initLightbox() {
             const listIndex = this.#modalBody.getElementsByClassName('lightbox_item');
             const focusOut = (this.#focusOut.tagName === 'BUTTON')?
@@ -185,12 +169,10 @@ class Modal {
                 this.#lastFocus.focus();
                 event.preventDefault();
             }
-        } else {
-            if (document.activeElement === this.#lastFocus) {
+        } else if (document.activeElement === this.#lastFocus) {
                 this.#focusIn.focus();
                 event.preventDefault();
             }
-        }
     }
 
     // efface la modale
