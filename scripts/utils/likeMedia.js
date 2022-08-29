@@ -3,25 +3,16 @@ const arrayLikesUpdate = [];
 
 // eslint-disable-next-line no-unused-vars
 function setOnLikeEvent(element, id) {
-    const hiddenLabel = element.querySelector("span[class=sr-only]");
-    // ajoute 1 like unique au click de la souris et diffuse l'évènement
+    // écoute le click sur la zone liker
     element.addEventListener('click', () => {
         if(element.getAttribute('data-isliked') === 'false') {
             increaseLikes(element, id);
-            // change l'information donnée au lecteur d'écran
-            hiddenLabel.textContent = "Liké";
-            // diffuse l'évènement vers le panneau de la somme des likes
-            dispatchIncreaseLikes();
         }
     });
-    // ajoute 1 like unique suite à Enter et diffuse l'évènement
+    // écoute Enter sur la zone liker
     element.addEventListener('keydown', (e) => {
         if(element.getAttribute('data-isliked') === 'false' && e.key === 'Enter') {
             increaseLikes(element, id);
-            // change l'information donnée au lecteur d'écran
-            hiddenLabel.textContent = "Liké";
-            // diffuse l'évènement vers le panneau de la somme des likes
-            dispatchIncreaseLikes();
         }
     });
 }
@@ -29,13 +20,18 @@ function setOnLikeEvent(element, id) {
 // ajoute 1 like
 function increaseLikes(element, id) {
     const countLikes = element.querySelector("span:not([class=sr-only])");
+    const hiddenLabel = element.querySelector("span[class=sr-only]");
     const heart = element.querySelector('img');
     const updateLikes = Number(countLikes.textContent)+1;
     countLikes.textContent = updateLikes;
     element.setAttribute('data-isliked', 'true');
     heart.setAttribute("src", "assets/icons/heart_black.svg");
-    //
+    // enregistre le like
     arrayLikesUpdate.push({id : id, likes : updateLikes});
+    // change l'information donnée au lecteur d'écran
+    hiddenLabel.textContent = "Liké";
+    // diffuse l'évènement pour mise à jour du panneau de la somme des likes
+    dispatchIncreaseLikes();
 }
 
 // diffuse l'évènement pour mise à jour du panneau
