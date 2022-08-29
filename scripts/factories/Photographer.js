@@ -4,7 +4,7 @@ function photographerFactory(data, page) {
     const picture = `assets/photographers/${portrait}`;
     const shortAddress = `${city}, ${country}`;
     const pricePerDay = `${price}€/jour`;
-    const link = `/photographer.html?id=${id}`;
+    const link = `photographer.html?id=${id}`;
     const currentPage = page;
 
     //* méthode de présentation des informations sur les photographes
